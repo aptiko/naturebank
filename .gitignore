@@ -1,0 +1,4 @@
+*.pyc
+*.egg-info
+filotis/settings/local.py
+site_media/
