@@ -10,7 +10,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'naturebank_el',
-        'USER': 'naturebank_admin',
+        'USER': 'filotis',
         'PASSWORD': 'topsecret',
         'HOST': 'localhost',
     }
