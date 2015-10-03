@@ -4,11 +4,6 @@ import sys
 SITE_ID = 1
 USE_I18N = True
 
-ADMIN_TABS =  (('Filotis', ('naturebank')),
-               ('Maintenance', ('auth', 'flatpages', 'sites')),
-               ('Legacy', ('naturebank_legacy')))
-ADMIN_TABS_DEFAULT_NAME = 'Filotis'
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -29,7 +24,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'filotis.urls'
+ROOT_URLCONF = 'naturebank_el.urls'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -47,8 +42,6 @@ INSTALLED_APPS = (
     #'ajax_filtered_fields',
     'pagination',
     'django_sorting',
-
-    #'naturebank_legacy',
     'naturebank',
 )
 

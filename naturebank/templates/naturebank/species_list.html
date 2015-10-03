@@ -19,7 +19,7 @@ function enable_disable_plant_kind()
   var todisable = true;
   if($("form select[name='species_category']").val()=='4')
     todisable = false;
-  if(todisable) 
+  if(todisable)
     $("form select[name=plant_kind]").val('');
   $("form select[name=plant_kind]").attr('disabled', todisable);
   if(todisable)
@@ -44,7 +44,7 @@ ul#id_species_name li {
 {% endblock %}
 
 {% block title %}
-Φιλότης - Είδη
+NatureBank - Είδη
 {% endblock %}
 
 {% block content_main %}

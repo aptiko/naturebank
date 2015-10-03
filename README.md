@@ -1,10 +1,12 @@
-NatureBank Version 1.0 (2015-10-01)
-===================================
+NatureBank
+==========
+
+Version 1.0 (2015-10-01)
 
 NatureBank is a database for managing data on biotopes and landscapes
 as well as species of the flora and fauna. It can be accessed through
 a web application powered by Django. This is a Greek version of NatureBank
-i.a. all textual information (web pages, names, descriptions etc.) are in
+i.e. all textual information (web pages, names, descriptions etc.) are in
 Greek language.
 
 

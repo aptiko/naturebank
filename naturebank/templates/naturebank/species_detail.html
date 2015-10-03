@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block title %}
-{% trans "Φιλότης - " %}{{ species.species_category.name }} - {{ species.species_name }} 
+{% trans "NatureBank - " %}{{ species.species_category.name }} - {{ species.species_name }}
     {% if species.sub_species %} - {{ species.sub_species }} {% endif %}
     {% if species.species_name_gr %} ({{ species.species_name_gr }}) {% endif %}
 {% endblock %}
@@ -140,7 +140,7 @@
                 </tr>
         </table>
         {% if biotopes %}
-        <h2>Τόποι εμφάνισης του είδους "{{ species.species_name }} 
+        <h2>Τόποι εμφάνισης του είδους "{{ species.species_name }}
             {%if species.sub_species %} - {{ species.sub_species }} {% endif %}"
         </h2>
     </div>

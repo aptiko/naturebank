@@ -33,7 +33,8 @@ $(document).ready(function() {
 <!-- jQuery thickbox plugin -->
 <!--<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>-->
 <!-- <script type="text/javascript" src="{{ STATIC_URL }}js/thickbox.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/thickbox.css" media="screen" /> -->
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/thickbox.css" media="screen" />
+ -->
 <!-- jQuery thickbox plugin -->
 {% endblock %}
 
@@ -49,7 +50,7 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block title %}
-    {% trans "Φιλότης - Τόποι" %}
+    {% trans "NatureBank - Τόποι" %}
 {% endblock %}
 
 {% block content_main %}
@@ -155,7 +156,7 @@ $(document).ready(function() {
         {% for w in image_list %}
             <tr><td align="center">
             <a href="{% url 'biotope_detail' w.biotope.site_code %}" title="{{w.remarks}}">
-            <img src="{{w.thumbnail.url}}" width="{{w.thumbnail.width}}" 
+            <img src="{{w.thumbnail.url}}" width="{{w.thumbnail.width}}"
               height="{{w.thumbnail.height}}" alt="{{w.descr}}"
               border="0" /><br>{{w.biotope.site_code}} - {{w.biotope.site_name_gr}}
                               ({{w.biotope.category}})</a>

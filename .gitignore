@@ -1,4 +1,4 @@
 *.pyc
 *.egg-info
-filotis/settings/local.py
+naturebank_el/settings/local.py
 site_media/

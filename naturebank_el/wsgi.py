@@ -1,5 +1,5 @@
 """
-WSGI config for filotis project.
+WSGI config for NatureBank project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "filotis.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "naturebank_el.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

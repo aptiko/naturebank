@@ -1,4 +1,4 @@
-from filotis.settings.base import *
+from naturebank_el.settings.base import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,8 +9,8 @@ MEDIA_ROOT = 'site_media'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'filotis',
-        'USER': 'filotis',
+        'NAME': 'naturebank_el',
+        'USER': 'naturebank_admin',
         'PASSWORD': 'topsecret',
         'HOST': 'localhost',
     }
