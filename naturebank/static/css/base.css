@@ -28,7 +28,7 @@ div#header {
   width: auto;
   border-bottom:thin solid #DDDDDD;
   overflow: visible;
-  width: 815px;
+  width: 915px;
   z-index: 9950;
   padding-top: 10px;
 }
@@ -214,8 +214,9 @@ a.tag {
 
 a.menu {
     background: url('../images/naturebank-link.png') center left no-repeat;
-    padding-left:24px;
-    padding-right:2px;
+    padding-left:26px;
+    padding-right:12px;
+  font-size: 120%;
 }
 
 td.spi {background-repeat:no-repeat; background-position: left center; width: 20px; display: none;}
