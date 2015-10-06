@@ -1,4 +1,4 @@
-from naturebank_el.settings.base import *
+from .base import *
 
 # Customize the following parameters and rename the file to local.py
 

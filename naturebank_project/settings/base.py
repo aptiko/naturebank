@@ -24,7 +24,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'naturebank_el.urls'
+ROOT_URLCONF = 'naturebank_project.urls'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
