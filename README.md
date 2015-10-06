@@ -31,15 +31,37 @@ software or other spatially enabled databases may work as well.
 
 Installation
 ------------
- * Install Python, PostreSQL and PostGIS
- * Install Django and dependencies
- * Create a database user and a database supporting UTF8
- * Populate the database (dump data file will be prepared)
- * Create and configure a file /filotis/settings/local.py same as
-   /filotis/settings/development.py
- * Configure your web server
 
 (to be completed)
+
+#### Install Python, PostreSQL and PostGIS
+#### Install Django and dependencies
+#### Create a database user
+#### Create a spatially enabled database
+
+`createdb <database name> -U postgres -W -h localhost -O filotis
+     -T template_postgis`
+
+Replace <database name> with a name for the database, e.g. filotis.
+
+#### Populate the database
+
+Populate the database with one of the dump files provided in directory /db
+
+`pg_restore -i -h localhost -U postgres -d <database name> -v
+     <path>/db/<dump file>`
+
+Again, replace <database name> with the name for the database.
+Use dump file *naturebank.dump* if you wish to install a database with
+empty tables filled only with some indicative data. Use *filotis.dump*
+as a dump file if you wish to install the Filotis database.
+
+#### Create the configuration file
+
+Copy file /naturebank_project/settings/local-example.py to
+/naturebank_project/settings/local.py making the appropriate adjustments.
+
+#### Configure your web server
 
 
 License
