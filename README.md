@@ -5,9 +5,15 @@ Version 1.0 (2015-10-01)
 
 NatureBank is a database for managing data on biotopes and landscapes
 as well as species of the flora and fauna. It can be accessed through
-a web application powered by Django. This is a Greek version of NatureBank
-i.e. all textual information (web pages, names, descriptions etc.) are in
-Greek language.
+a web application powered by Django.
+
+This is a Greek version of NatureBank, i.e. all textual information
+(web pages, names, descriptions etc.) are in Greek language. There are
+two versions of the database provided with this repository:
+ 1. An empty database including only indicative data of lookup tables
+    (/db/naturebank.dump).
+ 2. The Filotis database, populated with data from the natural environment
+    of Greece (/db/filotis.dump).
 
 
 Requirements
@@ -71,9 +77,9 @@ of them are copylefted.
 
 Acknowledgements
 ----------------
-NatureBank is based on Filotis developed between 2005-2015 by the
-National Technical University of Athens.
-Main authors of Filotis are Anthony Christophides and Stefanos Kozanis.
-Theodore Kargas was the main author of the initial version of Filotis.
+NatureBank is based on Filotis, a database for the natural environment
+of Greece, developed between 2005-2015 by the National Technical University
+of Athens. Main authors of Filotis are Anthony Christophides and Stefanos
+Kozanis. Theodore Kargas was the main author of the initial version of Filotis.
 Authors of NatureBank are Antonis Christophides, George Karavokiros and
 Antonis Koukouvinos.
