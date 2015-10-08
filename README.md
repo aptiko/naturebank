@@ -7,13 +7,12 @@ NatureBank is a database for managing data on biotopes and landscapes
 as well as species of the flora and fauna. It can be accessed through
 a web application powered by Django.
 
-This is a Greek version of NatureBank, i.e. all textual information
-(web pages, names, descriptions etc.) are in Greek language. There are
-two versions of the database provided with this repository:
- 1. An empty database including only indicative data of lookup tables
-    (/db/naturebank.dump).
- 2. The Filotis database, populated with data from the natural environment
-    of Greece (/db/filotis.dump).
+The database provided with this repository is empty, containing only
+indicative data of lookup tables mostly in Greek language (/db/naturebank.dump).
+
+If you are looking for the NatureBank application of Filotis, populated
+with data from the natural environment of Greece try the
+[Filotis repository](https://github.com/ellak-monades-aristeias/naturebank-filotis).
 
 
 Requirements
@@ -39,22 +38,18 @@ Installation
 #### Create a database user
 #### Create a spatially enabled database
 
-`createdb <database name> -U postgres -W -h localhost -O filotis
+`createdb naturebank -U postgres -W -h localhost -O filotis
      -T template_postgis`
-
-Replace <database name> with a name for the database, e.g. filotis.
 
 #### Populate the database
 
 Populate the database with one of the dump files provided in directory /db
 
-`pg_restore -i -h localhost -U postgres -d <database name> -v
+`pg_restore -i -h localhost -U postgres -d naturebank -v
      <path>/db/<dump file>`
 
-Again, replace <database name> with the name for the database.
-Use dump file *naturebank.dump* if you wish to install a database with
-empty tables filled only with some indicative data. Use *filotis.dump*
-as a dump file if you wish to install the Filotis database.
+Use dump file */db/naturebank.dump* to install the database with
+empty tables filled only with some indicative data.
 
 #### Create the configuration file
 
