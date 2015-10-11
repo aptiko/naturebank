@@ -43,8 +43,6 @@ Installation
 
 #### Populate the database
 
-Populate the database with one of the dump files provided in directory /db
-
 `pg_restore -i -h localhost -U postgres -d naturebank -v
      <path>/db/<dump file>`
 
