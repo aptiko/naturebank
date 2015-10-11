@@ -20,7 +20,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django_sorting.middleware.SortingMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
@@ -33,13 +32,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.gis',
-    'django.contrib.flatpages',
     'django.contrib.staticfiles',
 
     # External Dependencies
     'admintabs',
     'django_filters',
-    #'ajax_filtered_fields',
     'pagination',
     'django_sorting',
     'naturebank',

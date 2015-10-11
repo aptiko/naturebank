@@ -20,6 +20,19 @@ filter_keys = ('category', 'climate', 'site_type', 'habitation',
                'cultural_value', 'threat', 'conservation')
 
 
+def frontpage(request):
+    return render_to_response('frontpage.html', {},
+                               context_instance=RequestContext(request))
+
+def info_usage(request):
+    return render_to_response('info_usage.html', {},
+                               context_instance=RequestContext(request))
+
+def poweredby(request):
+    return render_to_response('poweredby.html', {},
+                               context_instance=RequestContext(request))
+
+
 class BiotopeListView(ListView):
     model = Biotope
 
@@ -88,7 +101,7 @@ def render_biotope_list_filter(filter_name):
                     'climate': 'models.ClimateOption','ecological_value': 'models.EcologicalValueOption',
                     'designation': 'models.DesignationOption', 'condition': 'models.ConditionOption',
                     'abandon': 'models.AbandonmentOption', 'trend': 'models.TrendOption',
-                    'social_value': 'models.SocialValueOption', 'cultural_value': 'models.CulturalValueOption', 
+                    'social_value': 'models.SocialValueOption', 'cultural_value': 'models.CulturalValueOption',
                     'threat': 'models.ThreatOption', 'conservation': 'models.ConservationOption'}
     filter_items = eval(filter_names[filter_name]).objects.all()
     s = ''
@@ -173,7 +186,7 @@ class SpeciesDetailView(DetailView):
 
 def index(request):
     """The view which returns the index page of the project"""
-    
+
     return render_to_response('index.html', {},
                                  context_instance=RequestContext(request))
 
@@ -294,11 +307,11 @@ def settlements_kml(request):
         bbox=request.GET.get('BBOX', request.GET.get('bbox', None))
     except Exception, e:
         raise Http404
-    queryres = Settlement.objects.all().filter(point__isnull=False)        
+    queryres = Settlement.objects.all().filter(point__isnull=False)
     if bbox:
         try:
             minx, miny, maxx, maxy=[float(i) for i in bbox.split(',')]
-            geom=Polygon(((minx, miny), (minx, maxy), (maxx, maxy), 
+            geom=Polygon(((minx, miny), (minx, maxy), (maxx, maxy),
                                         (maxx, miny), (minx, miny)), srid=4326)
             mean_size2=maxx-minx+maxy-miny
             queryres = queryres.filter(point__contained=geom)
@@ -307,7 +320,7 @@ def settlements_kml(request):
         except Exception, e:
             raise Http404
     for arow in queryres:
-        if arow.point: 
+        if arow.point:
             arow.kml = arow.point.kml
     response = render_to_kml("point_placemarks.kml", {'places': queryres})
     return response

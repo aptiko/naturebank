@@ -8,9 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     (r'^admin/', include(admin.site.urls)),
-    # (r'^ajax_filtered_fields/', include('ajax_filtered_fields.urls')),
     (r'', include('naturebank.urls')),
-    (r'', include('django.contrib.flatpages.urls')),
 )
 
 if settings.DEBUG:

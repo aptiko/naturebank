@@ -36,13 +36,13 @@
 <div id="wrapper">
   <div id="header">
     <div id="logo" style="display: none;">
-      <a class="simlink" href="{% url 'index' %}" alt="{% trans "Go to start page" %}" title="{% trans "Go to start page" %}">
+      <a class="simlink" href="{% url 'frontpage' %}" alt="{% trans "Go to start page" %}" title="{% trans "Go to start page" %}">
         {% block logo %}<img src="{{ STATIC_URL }}images/ntua.gif" style="border:0;padding:10px;">{% endblock %}
         {% block headtitle %}<h1>NatureBank</h1>{% endblock %}
       </a>
     </div>
 
-    <a class="simlink" href="{% url 'index' %}" title="{% trans "Αρχική σελίδα" %}">
+    <a class="simlink" href="{% url 'frontpage' %}" title="{% trans "Αρχική σελίδα" %}">
     <img src="{{ STATIC_URL  }}images/naturebank_logo_small.png" id="topbanner"></a>
 
     <div id="toplinkcontainer">
@@ -76,8 +76,8 @@
               </dd>
             </dl>
           </div>
-          &nbsp;&nbsp;&nbsp;&nbsp;<a href="/info/" class="menu">{% trans "Περιγραφή" %}</a>&nbsp;&nbsp;
-          <a href="/info/usage/" class="menu">{% trans "Οδηγίες χρήσης" %}</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="menu">{% trans "Περιγραφή" %}</a>&nbsp;&nbsp;
+          <a href="/info_usage/" class="menu">{% trans "Οδηγίες χρήσης" %}</a>
     </div>
 
   </div>

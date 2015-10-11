@@ -19,7 +19,9 @@ species_list = {
 
 urlpatterns = patterns(
     '',
-    url(r'^$', RedirectView.as_view(url='/home/'), name='index'),
+    url(r'^$', views.frontpage, name='frontpage'),
+    url(r'^info_usage/$', views.info_usage, name='info_usage'),
+    url(r'^poweredby/$', views.poweredby, name='poweredby'),
     url(r'^biotopes/$', views.BiotopeListView.as_view(), name='biotope_list'),
     url(r'^biotopes/d/(?P<pk>\d+)/$', views.BiotopeDetailView.as_view(),
         name='biotope_detail'),
