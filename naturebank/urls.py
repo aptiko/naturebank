@@ -20,6 +20,7 @@ species_list = {
 urlpatterns = patterns(
     '',
     url(r'^$', views.frontpage, name='frontpage'),
+    url(r'^info/$', views.info, name='info'),
     url(r'^info_usage/$', views.info_usage, name='info_usage'),
     url(r'^poweredby/$', views.poweredby, name='poweredby'),
     url(r'^biotopes/$', views.BiotopeListView.as_view(), name='biotope_list'),

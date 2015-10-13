@@ -24,6 +24,10 @@ def frontpage(request):
     return render_to_response('frontpage.html', {},
                                context_instance=RequestContext(request))
 
+def info(request):
+    return render_to_response('info.html', {},
+                               context_instance=RequestContext(request))
+
 def info_usage(request):
     return render_to_response('info_usage.html', {},
                                context_instance=RequestContext(request))

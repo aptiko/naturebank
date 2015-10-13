@@ -10,10 +10,6 @@ a web application powered by Django.
 The database provided with this repository is empty, containing only
 indicative data of lookup tables mostly in Greek language (/db/naturebank.dump).
 
-If you are looking for the NatureBank application of Filotis, populated
-with data from the natural environment of Greece try the
-[Filotis repository](https://github.com/ellak-monades-aristeias/naturebank-filotis).
-
 
 Requirements
 ------------
