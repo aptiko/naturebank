@@ -35,15 +35,11 @@
 <body onload="init()">
 <div id="wrapper">
   <div id="header">
-    <div id="logo" style="display: none;">
-      <a class="simlink" href="{% url 'frontpage' %}" alt="{% trans "Go to start page" %}" title="{% trans "Go to start page" %}">
-        {% block logo %}<img src="{{ STATIC_URL }}images/ntua.gif" style="border:0;padding:10px;">{% endblock %}
-        {% block headtitle %}<h1>NatureBank</h1>{% endblock %}
-      </a>
-    </div>
 
-    <a class="simlink" href="{% url 'frontpage' %}" title="{% trans "Αρχική σελίδα" %}">
-    <img src="{{ STATIC_URL  }}images/naturebank_logo_small.png" id="topbanner"></a>
+    <div class="simlink">
+    <a href="{% url 'frontpage' %}" title="{% trans "Αρχική σελίδα" %}">
+    {% block logo %}<img src="{{ STATIC_URL  }}images/naturebank_logo_small.png" id="topbanner">{% endblock %}</a>
+    </div>
 
     <div id="toplinkcontainer">
           <div style="float:left;">
@@ -92,7 +88,9 @@
 
   <div id="footer">
       <ul id="credits">
-        <li><a href="/poweredby/">Powered by NatureBank</a></li>
+        {% block footer %}
+            <li><a href="/poweredby/">Powered by NatureBank</a></li>
+        {% endblock %}
       </ul>
   </div>
 
