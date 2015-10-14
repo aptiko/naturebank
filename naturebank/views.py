@@ -37,6 +37,11 @@ def poweredby(request):
                                context_instance=RequestContext(request))
 
 
+def tos(request):
+    return render_to_response('tos.html', {},
+                               context_instance=RequestContext(request))
+
+
 class BiotopeListView(ListView):
     model = Biotope
 

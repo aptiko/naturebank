@@ -23,6 +23,7 @@ urlpatterns = patterns(
     url(r'^info/$', views.info, name='info'),
     url(r'^info_usage/$', views.info_usage, name='info_usage'),
     url(r'^poweredby/$', views.poweredby, name='poweredby'),
+    url(r'^tos/$', views.tos, name='tos'),
     url(r'^biotopes/$', views.BiotopeListView.as_view(), name='biotope_list'),
     url(r'^biotopes/d/(?P<pk>\d+)/$', views.BiotopeDetailView.as_view(),
         name='biotope_detail'),
