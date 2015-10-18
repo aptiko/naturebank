@@ -151,7 +151,7 @@ class BiotopeDetailView(DetailView):
                 species_category=SpeciesCategoryOption.objects.get(
                     abbreviation=k.upper()))
                 for k in ['bird', 'fish', 'flor', 'inve', 'mamm']})
-        context['imagelist'] = BiotopeImage.objects.order_by("order").filter(
+        context['image_list'] = BiotopeImage.objects.order_by("order").filter(
             biotope__id=self.object.id)
         return context
 
