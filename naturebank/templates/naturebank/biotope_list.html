@@ -30,12 +30,6 @@ $(document).ready(function() {
 });
 </script>
 {% endcomment %}
-<!-- jQuery thickbox plugin -->
-<!--<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>-->
-<!-- <script type="text/javascript" src="{{ STATIC_URL }}js/thickbox.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/thickbox.css" media="screen" />
- -->
-<!-- jQuery thickbox plugin -->
 {% endblock %}
 
 {% block extracss %}
@@ -78,7 +72,6 @@ $(document).ready(function() {
                         <p class="legend">
                         <input type=radio checked name="rdbase" value="0" onClick="changeBaseLayer(0);">Open cycle map<br>
                         <input type=radio name="rdbase" value="1" onClick="changeBaseLayer(1);">Open Street map<br>
-                        <input type=radio name="rdbase" value="2" onClick="changeBaseLayer(2);">Google earth<br>
                         <input type=radio name="rdbase" value="3" onClick="changeBaseLayer(3);">Κτηματολόγιο Α.Ε.
                         </p>
                         </form>
