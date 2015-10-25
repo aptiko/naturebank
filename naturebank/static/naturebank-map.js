@@ -31,14 +31,14 @@ var bounds = new OpenLayers.Bounds();
 bounds.extend(point1);
 bounds.extend(point2);
 bounds.transform(new OpenLayers.Projection("EPSG:4326"), new
-OpenLayers.Projection("EPSG:900913"));
+OpenLayers.Projection("EPSG:3857"));
 var map = null;
 var apopup = null;
 var ktimatologio = new OpenLayers.Layer.WMS("Υπόβαθρο «ΚΤΗΜΑΤΟΛΟΓΙΟ Α.Ε.»",
   "http://gis.ktimanet.gr/wms/wmsopen/wmsserver.aspx",
     {   layers: 'KTBASEMAP', transparent: false},
     {   isBaseLayer: true,
-        projection: new OpenLayers.Projection("EPSG:900913"),
+        projection: new OpenLayers.Projection("EPSG:3857"),
         iformat: 'image/png', maxExtent: bounds, numZoomLevels:
         15, units: "m", maxResolution: 900,
         attribution: ""});
@@ -46,8 +46,7 @@ var osm = new OpenLayers.Layer.OSM.Mapnik("Υπόβαθρο \"Open Street Map\""
         attribution: "Map by <a href='http://www.openstreetmap.org/'>OSM</a>"});
 var ocm = new OpenLayers.Layer.OSM.CycleMap("Υπόβαθρο \"Open Cycle Map\"",{isBaseLayer: true,
         attribution: "Map by <a href='http://www.openstreetmap.org/'>OSM</a>"});
-var google_hyb = new OpenLayers.Layer.Google("Google Hybrid map", {isBaseLayer:true, numZoomLevels: 20, type: google.maps.MapTypeId.HYBRID, animationEnabled:false});
-var base_layers = [ocm, osm, google_hyb, ktimatologio];
+var base_layers = [ocm, osm, ktimatologio];
 function InvokePopup(tfeature) {
     if(!tfeature.cluster)
         afeature = tfeature;
@@ -249,7 +248,7 @@ function init() {
         'numZoomLevels' :   15,
         'sphericalMercator': true,
         'maxExtent': bounds,
-        'projection'    :   new OpenLayers.Projection("EPSG:9009313"),
+        'projection'    :   new OpenLayers.Projection("EPSG:3857"),
         'displayProjection':    new OpenLayers.Projection("EPSG:4326")
     };
     map = new OpenLayers.Map('map', options);
@@ -271,7 +270,6 @@ function init() {
     map.addControl(new OpenLayers.Control.OverviewMap());
     map.addLayer(ocm);
     map.addLayer(osm);
-    map.addLayer(google_hyb);
     map.addLayer(ktimatologio);
     map.addLayer(settlements);
     var cat_id_repr ="";
@@ -330,7 +328,7 @@ function init() {
         success: function(data){
             bounds = OpenLayers.Bounds.fromString(data);
             bounds.transform(new OpenLayers.Projection("EPSG:4326"), new
-                                 OpenLayers.Projection("EPSG:900913"));
+                                 OpenLayers.Projection("EPSG:3857"));
             map.zoomToExtent(bounds);
         }, 
         error: function(data){
@@ -380,7 +378,7 @@ function ShowProgress(name){
    var aprogress = document.getElementById("progress_"+name);
    if(aprogress==null)return;
    aprogress.innerHTML=
-       "<img src='"+STATIC_URL+"'/wait16.gif'>";
+       "<img src='"+STATIC_URL+"/wait16.gif'>";
 }
 
 function HideProgress(name){
