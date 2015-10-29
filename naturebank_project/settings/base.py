@@ -42,6 +42,9 @@ INSTALLED_APPS = (
     'naturebank',
 )
 
+##TEMPLATE_DIRS = ('/home/naturebank/nb/naturebank-filotis/templates/',)
+##STATICFILES_DIRS = ('/home/naturebank/nb/naturebank-filotis/static/',)
+
 PAGINATION_INVALID_PAGE_RAISES_404 = True
 
 STATIC_URL = '/static/'

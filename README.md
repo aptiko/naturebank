@@ -27,8 +27,6 @@ software or other spatially enabled databases may work as well.
 Installation
 ------------
 
-(to be completed)
-
 #### Install Python, PostreSQL and PostGIS
 #### Install Django and dependencies
 #### Create a database user
@@ -94,3 +92,15 @@ of Athens. Main authors of Filotis are Anthony Christophides and Stefanos
 Kozanis. Theodore Kargas was the main author of the initial version of Filotis.
 Authors of NatureBank are Antonis Christophides, George Karavokiros and
 Antonis Koukouvinos.
+
+Related Sites
+-------------
+The following sites and documents are related with the NatureBank project:
+
+Description|URL
+-----------|---
+NatureBank, a database for managing data on biotopes and landscapes as well as species of the flora and fauna. |https://github.com/ellak-monades-aristeias/naturebank
+User guide for NatureBank (in Greek)|https://github.com/ellak-monades-aristeias/naturebank/blob/master/NatureBank_user_guide.pdf
+naturebank-filotis, a customization of NatureBank, which modifies the Django templates for the Filotis website hosting a database for the Greek nature.|https://github.com/ellak-monades-aristeias/naturebank-filotis
+An Ansible role that installs NatureBank on a server.|https://github.com/ellak-monades-aristeias/naturebank-ansible
+The database for the Natural Environment of Greece FILOTIS has been checked for compatibility with the CC-by-SA license, and WMS/WFS services have been established |http://filotis.itia.ntua.gr/
