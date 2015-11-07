@@ -9,6 +9,7 @@ urlpatterns = patterns(
     '',
     (r'^admin/', include(admin.site.urls)),
     (r'', include('naturebank.urls')),
+    (r'', include('django.contrib.flatpages.urls')),
 )
 
 if settings.DEBUG:

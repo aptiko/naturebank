@@ -42,6 +42,9 @@ Installation
 
 Use dump file */db/naturebank.dump* to install the database with
 empty tables filled only with some indicative data.
+After that load the fixture for the django flatpages:
+
+`python manage.py loaddata naturebank_flatpages.json`
 
 #### Create the configuration file
 

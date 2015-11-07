@@ -21,6 +21,7 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware',
     'django_sorting.middleware.SortingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
 ROOT_URLCONF = 'naturebank_project.urls'
@@ -33,6 +34,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
 
     # External Dependencies
     'admintabs',
@@ -48,3 +50,7 @@ INSTALLED_APPS = (
 PAGINATION_INVALID_PAGE_RAISES_404 = True
 
 STATIC_URL = '/static/'
+
+FIXTURE_DIRS = (
+   '/fixtures/',
+)

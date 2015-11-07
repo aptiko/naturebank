@@ -19,17 +19,6 @@ species_list = {
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.frontpage, name='frontpage'),
-
-    # In older filotis versions, the root page used to redirect permanently to
-    # /home. This redirection may be cached in the user's browser. Redirecting
-    # /home back to root will cause the browser to discard that cache.
-    url(r'^home/$', RedirectView.as_view(url='/', permanent=False)),
-
-    url(r'^info/$', views.info, name='info'),
-    url(r'^info_usage/$', views.info_usage, name='info_usage'),
-    url(r'^poweredby/$', views.poweredby, name='poweredby'),
-    url(r'^tos/$', views.tos, name='tos'),
     url(r'^biotopes/$', views.BiotopeListView.as_view(), name='biotope_list'),
     url(r'^biotopes/d/(?P<pk>\d+)/$', views.BiotopeDetailView.as_view(),
         name='biotope_detail'),
