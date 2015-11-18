@@ -27,6 +27,10 @@ software or other spatially enabled databases may work as well.
 Installation
 ------------
 
+The following steps are needed to manually install NatureBank.
+For an automated approach using Ansible visit the [naturebank-ansible
+repository](https://github.com/ellak-monades-aristeias/naturebank-ansible)
+
 #### Install Python, PostreSQL and PostGIS
 #### Install Django and dependencies
 #### Create a database user
