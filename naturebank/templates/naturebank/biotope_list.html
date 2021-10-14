@@ -2,7 +2,6 @@
 {% load static %}
 {% load i18n %}
 {% load pagination_tags %}
-{% load sorting_tags %}
 
 {% block js-globals %}
     <script type="text/javascript">var map_mode=1;
@@ -49,7 +48,6 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content_main %}
-    {% autosort object_list %}
     {% autopaginate object_list 25 %}
     <div id="mapandtextcontainer">
     <fieldset style="margin: inherit auto; width: 700px" class="compact">
@@ -121,8 +119,8 @@ $(document).ready(function() {
     <table class="tablesorter">
       <thead>
         <tr>
-          <th>{% anchor site_code 'Κωδικός' %}</th>
-          <th>{% anchor site_name_gr 'Όνομα' %}</th>
+          <th>Κωδικός</th>
+          <th>Όνομα</th>
         </tr>
       </thead>
       <tbody>

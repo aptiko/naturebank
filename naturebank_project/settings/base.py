@@ -19,7 +19,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    'django_sorting.middleware.SortingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
@@ -39,7 +38,6 @@ INSTALLED_APPS = (
     # External Dependencies
     'django_filters',
     'pagination',
-    'django_sorting',
     'naturebank',
 )
 

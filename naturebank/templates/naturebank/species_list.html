@@ -2,14 +2,12 @@
 {% load static %}
 {% load i18n %}
 {% load pagination_tags %}
-{% load sorting_tags %}
 
 {% block title %}
 NatureBank - Είδη
 {% endblock %}
 
 {% block content_main %}
-    {% autosort object_list %}
     {% autopaginate object_list 20 %}
 <div id="mapandtextcontainer"><div id="detailtext">
     <fieldset style="margin: inherit auto; width: 50%;" class="compact">
@@ -30,10 +28,10 @@ NatureBank - Είδη
       <thead>
         <tr>
           <td class="spi">
-          <th>{% anchor species_name 'Ονομασία' %}</th>
-          <th>{% anchor sub_species 'Υποείδος' %}</th>
-          <th>{% anchor species_name_gr 'Κοινή ονομασία' %}</th>
-          <th>{% trans 'Φωτογραφία' %}</th>
+          <th>Ονομασία</th>
+          <th>Υποείδος</th>
+          <th>Κοινή ονομασία</th>
+          <th>Φωτογραφία</th>
         </tr>
       </thead>
       <tbody>

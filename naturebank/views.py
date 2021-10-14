@@ -181,15 +181,7 @@ class SpeciesDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(SpeciesDetailView, self).get_context_data()
-        biotope_sort = self.request.GET.get('sort',
-                                            self.request.GET.get('SORT', None))
-        if (not biotope_sort) or (biotope_sort not in
-                                  models.Biotope._meta.get_all_field_names()):
-            biotope_sort = ['geo_code', 'category']
-        else:
-            biotope_sort = [biotope_sort]
-        q = self.object.biotope_set.exclude(category=5).order_by(*biotope_sort)
-        context['biotopes'] = q
+        context['biotopes'] = self.object.biotope_set.exclude(category=5)
         return context
 
 

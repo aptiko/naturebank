@@ -1,7 +1,6 @@
 {% extends "base-map.html" %}
 {% load i18n %}
 {% load comma_manipulation %}
-{% load sorting_tags %}
 
 {% block js-globals %}
     <script type="text/javascript">var map_mode=3; aspecies_id={{ species.id }}</script>
@@ -171,10 +170,10 @@
         <table class="definition tablesorter">
             <thead>
             <tr>
-                <th>{% anchor site_code "Κωδικός τόπου" %}</th>
-                <th>{% anchor site_name_gr "Τόπος" %}</th>
-                <th>{% anchor category "Κατηγορία τόπου" %}</th>
-                <th>{% anchor geo_code "Γεωγραφική ενότητα" %}</th>
+                <th>Κωδικός τόπου</th>
+                <th>Τόπος</th>
+                <th>Κατηγορία τόπου</th>
+                <th>Γεωγραφική ενότητα</th>
             </tr>
             </thead>
             <tbody>

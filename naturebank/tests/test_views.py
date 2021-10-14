@@ -149,56 +149,6 @@ class SpeciesListViewTestCase(DataTestCase):
         self.assertNotContains(response, 'Erpeton', status_code=200)
 
 
-class SpeciesDetailViewTestCase(DataTestCase):
-
-    def setUp(self):
-        self.create_test_data()
-
-    def test_sort(self):
-        c = Client()
-        aid = Species.objects.get(species_code=666).id
-
-        # Don't specify sort; should be sorted by category
-        response = c.get(u'/species/d/{}/'.format(aid))
-        self.assertEqual(response.status_code, 200)
-        self.assertInHTML("""
-                          <tr class="even">
-                            <td><a href="/biotopes/c/GR03/">GR03</a></td>
-                            <td><a href="/biotopes/c/GR03/">Lefkada natural
-                              lowlands</a></td>
-                            <td>NATURA</td>
-                            <td>lefkada</td>
-                          </tr>
-                          """, response.content)
-
-        # Sort by biotope code; this time GR03 should be in an odd row
-        # (first)
-        response = c.get(u'/species/d/{}/?sort=site_code'.format(aid))
-        self.assertInHTML("""
-                          <tr class="odd">
-                            <td><a href="/biotopes/c/GR03/">GR03</a></td>
-                            <td><a href="/biotopes/c/GR03/">Lefkada natural
-                              lowlands</a></td>
-                            <td>NATURA</td>
-                            <td>lefkada</td>
-                          </tr>
-                          """, response.content)
-
-        # Try to sort by a field that does not exist; should be the same as
-        # no sort
-        response = c.get(u'/species/d/{}/?sort=nonexistent'.format(aid))
-        self.assertEqual(response.status_code, 200)
-        self.assertInHTML("""
-                          <tr class="even">
-                            <td><a href="/biotopes/c/GR03/">GR03</a></td>
-                            <td><a href="/biotopes/c/GR03/">Lefkada natural
-                              lowlands</a></td>
-                            <td>NATURA</td>
-                            <td>lefkada</td>
-                          </tr>
-                          """, response.content)
-
-
 class BiotopeDetailViewTest(DataTestCase):
 
     def setUp(self):
