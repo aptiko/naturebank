@@ -1,4 +1,5 @@
 {% extends "base-map.html" %}
+{% load static %}
 {% load i18n %}
 {% load pagination_tags %}
 {% load sorting_tags %}
@@ -9,8 +10,8 @@
 {% endblock %}
 
 {% block extra_head %}
-<script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/truncate-2.3-pack/jquery-1.2.3.pack.js"></script>
-<script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/truncate-2.3-pack/jquery.truncate-2.3-pack.js"></script>
+<script language="javascript" type="text/javascript" src="{% static "js/truncate-2.3-pack/jquery-1.2.3.pack.js" %}"></script>
+<script language="javascript" type="text/javascript" src="{% static "js/truncate-2.3-pack/jquery.truncate-2.3-pack.js" %}"></script>
 <script language="javascript" type="text/javascript">
 </script>
 {% comment %}

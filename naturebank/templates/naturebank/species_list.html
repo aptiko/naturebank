@@ -1,45 +1,8 @@
 {% extends "base-nomap.html" %}
+{% load static %}
 {% load i18n %}
 {% load pagination_tags %}
 {% load sorting_tags %}
-
-{% block extra_head %}
-<script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/truncate-2.3-pack/jquery-1.2.3.pack.js"></script>
-<script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/truncate-2.3-pack/jquery.truncate-2.3-pack.js"></script>
-<script language="javascript" type="text/javascript">
-$(function() {
-
-    $(".truncate").truncate( 20, {
-        chars: /\s/,
-        trail: [ " ( <a href='#' class='truncate_show'>more</a> . . . )", " ( . . . <a href='#' class='truncate_hide'>less</a> )" ]
-    });
-});
-function enable_disable_plant_kind()
-{
-  var todisable = true;
-  if($("form select[name='species_category']").val()=='4')
-    todisable = false;
-  if(todisable)
-    $("form select[name=plant_kind]").val('');
-  $("form select[name=plant_kind]").attr('disabled', todisable);
-  if(todisable)
-      $("form select[name=plant_kind]").parent().parent().hide();
-  else
-      $("form select[name=plant_kind]").parent().parent().show();
-}
-</script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}js/thickbox.js"></script>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/thickbox.css" media="screen" />
-
-<style type="text/css">
-ul#id_species_name { padding-left: 1em; }
-
-ul#id_species_name li {
-  display: inline;
-}
-</style>
-{% endblock %}
 
 {% block title %}
 NatureBank - Είδη
@@ -86,10 +49,10 @@ NatureBank - Είδη
         <td align="center">
             {% if species.photo %}
             <a class="thickbox" href="{{ MEDIA_URL }}{{ species.photo }}">
-                <img src="{{ STATIC_URL }}images/icons/picture.png" style="border:0px"/>
+                <img src="{% static "images/icons/picture.png" %}" style="border:0px"/>
             </a>
             {% else %}
-                <img src="{{ STATIC_URL }}images/icons/picture-none.png" style="border:0px"/>
+                <img src="{% static "images/icons/picture-none.png" %}" style="border:0px"/>
             {% endif %}
         </td>
       </tr>
@@ -104,6 +67,41 @@ NatureBank - Είδη
 </div></div>
 {% endblock %}
 {% block extrajs %}
+<script language="javascript" type="text/javascript" src="{% static "js/truncate-2.3-pack/jquery-1.2.3.pack.js" %}"></script>
+<script language="javascript" type="text/javascript" src="{% static "js/truncate-2.3-pack/jquery.truncate-2.3-pack.js" %}"></script>
+<script language="javascript" type="text/javascript">
+$(function() {
+
+    $(".truncate").truncate( 20, {
+        chars: /\s/,
+        trail: [ " ( <a href='#' class='truncate_show'>more</a> . . . )", " ( . . . <a href='#' class='truncate_hide'>less</a> )" ]
+    });
+});
+function enable_disable_plant_kind()
+{
+  var todisable = true;
+  if($("form select[name='species_category']").val()=='4')
+    todisable = false;
+  if(todisable)
+    $("form select[name=plant_kind]").val('');
+  $("form select[name=plant_kind]").attr('disabled', todisable);
+  if(todisable)
+      $("form select[name=plant_kind]").parent().parent().hide();
+  else
+      $("form select[name=plant_kind]").parent().parent().show();
+}
+</script>
+
+        <script type="text/javascript" src="{% static "js/thickbox.js" %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static "css/thickbox.css" %}" media="screen" />
+
+<style type="text/css">
+ul#id_species_name { padding-left: 1em; }
+
+ul#id_species_name li {
+  display: inline;
+}
+</style>
 <script language="javascript">
 enable_disable_plant_kind();
 $("form select[name='species_category']").change(enable_disable_plant_kind);

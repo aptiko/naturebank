@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block mapjs %}
@@ -8,5 +9,5 @@
         <script type="text/javascript"
                 src="//www.openstreetmap.org/openlayers/OpenStreetMap.js">
         </script>
-        <script type="text/javascript" src="{{STATIC_URL }}naturebank-map.js"></script>
+        <script type="text/javascript" src="{% static "naturebank-map.js" %}"></script>
 {% endblock %}

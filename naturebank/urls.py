@@ -34,6 +34,4 @@ urlpatterns = patterns(
     (r'^(?P<layer>[^/]+)/kml/$', views.kml, {}),
     (r'^bound/$', views.bound, {}),
     (r'^settlements/$', views.settlements_kml, {}),
-    url(r'^favicon\.ico$', RedirectView.as_view(
-        url=settings.STATIC_URL + 'favicon.ico'), name='favicon'),
 )

@@ -1,9 +1,10 @@
 {% extends "admin/base_site.html" %}
+{% load static %}
 {% load i18n admin_modify adminmedia %}
 
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript" src="../../../jsi18n/"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="{% static "js/tiny_mce/tiny_mce.js" %}"></script>
 <script type="text/javascript">
 tinyMCE.init({
 	mode: "textareas",
@@ -13,7 +14,7 @@ tinyMCE.init({
 {{ media }}
 {% endblock %}
 
-{% block stylesheet %}{{ STATIC_URL }}admin/css/forms.css{% endblock %}
+{% block stylesheet %}{% static "admin/css/forms.css" %}{% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
 
