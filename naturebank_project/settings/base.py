@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
 
     # External Dependencies
-    'admintabs',
     'django_filters',
     'pagination',
     'django_sorting',
