@@ -39,57 +39,57 @@ class Biotope(models.Model):
 
     # Species relation through intermediate table.
     species = models.ManyToManyField('Species', through='SpeciesBiotope',
-        verbose_name=u"Είδη Τόπου",null=True, blank=True,
+        verbose_name=u"Είδη Τόπου",
         help_text=u"Τα διάφορα είδη που απαντώνται στο τόπο.")
 
     # Designation relation through intermediate table.
     designation = models.ManyToManyField('DesignationOption',
-        verbose_name=u"Ένταξη σε Θεσμικό Πλαίσιο",null=True, blank=True,
+        verbose_name=u"Ένταξη σε Θεσμικό Πλαίσιο",
         help_text=u"Οι κατηγορίες ένταξης σε θεσμικό πλαίσιο.")
 
     # Ownership relation through intermediate table.
     owner = models.ManyToManyField('OwnerOption',
-        verbose_name=u"Ιδιοκτησία",null=True, blank=True,
+        verbose_name=u"Ιδιοκτησία",
         help_text=u"Κατηγορίες ιδιοκτησίας.")
 
     # Sitetype relation through intermediate table.
     site_type = models.ManyToManyField('SiteTypeOption',
-        verbose_name=u"Τύπος τοπίου",null=True, blank=True,
+        verbose_name=u"Τύπος τοπίου",
         help_text=u"Τύποι τοπίων.")
 
     # Climate relation through intermediate table.
     climate = models.ManyToManyField('ClimateOption',
-        verbose_name=u"Κλίμα",null=True, blank=True,
+        verbose_name=u"Κλίμα",
         help_text=u"Τύποι κλίματος.")
 
     # Ecological value relation through intermediate table.
     ecological_value = models.ManyToManyField('EcologicalValueOption',
-        verbose_name=u"Οικολογική",null=True, blank=True,
+        verbose_name=u"Οικολογική",
         help_text=u"Τύποι οικολογικής αξίας.")
 
     # Social value relation through intermediate table.
     social_value = models.ManyToManyField('SocialValueOption',
-        verbose_name=u"Κοινωνική, οικονομική και πολιτιστική",null=True, blank=True,
+        verbose_name=u"Κοινωνική, οικονομική και πολιτιστική",
         help_text=u"Τύποι κοινωνικοοικονομικής/πολιτιστικής αξίας.")
 
     # Cultural value relation through intermediate table.
     cultural_value = models.ManyToManyField('CulturalValueOption',
-        verbose_name=u"Αισθητική",null=True, blank=True,
+        verbose_name=u"Αισθητική",
         help_text=u"Τύποι αισθητικής αξίας")
 
     # Threat relation through intermediate table.
     threat = models.ManyToManyField('ThreatOption',
-        verbose_name=u"Απειλές",null=True, blank=True,
+        verbose_name=u"Απειλές",
         help_text=u"Κατηγορίες απειλών")
 
     # Human activity m2m
     human_activity = models.ManyToManyField('HumanActivityOption',
-        verbose_name=u"Ανθρώπινες δραστηρ.",null=True, blank=True,
+        verbose_name=u"Ανθρώπινες δραστηρ.",
         help_text=u"Κατηγορίες ανθρωπίνων δραστηριοτήτων")
 
     # Habitation m2m
     habitation = models.ManyToManyField('HabitationOption',
-        verbose_name=u"Χαρακτηρ. Ενδιαιτήματα",null=True, blank=True,
+        verbose_name=u"Χαρακτηρ. Ενδιαιτήματα",
         help_text=u"Κατηγορίες χαρακτηριστικών ενδιατημάτων")
 
     # Population trend field
