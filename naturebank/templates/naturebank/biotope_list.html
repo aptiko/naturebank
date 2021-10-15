@@ -1,7 +1,6 @@
 {% extends "base-map.html" %}
 {% load static %}
 {% load i18n %}
-{% load pagination_tags %}
 
 {% block js-globals %}
     <script type="text/javascript">var map_mode=1;
@@ -48,7 +47,6 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content_main %}
-    {% autopaginate object_list 25 %}
     <div id="mapandtextcontainer">
     <fieldset style="margin: inherit auto; width: 700px" class="compact">
       <table class="definition">
@@ -135,9 +133,8 @@ $(document).ready(function() {
     {% endfor %}
     </tbody>
     </table>
-    <p>
-      <div>{% paginate %}</div>
-    </p>
+    <p></p>
+    {% include "naturebank/page_navigation.html" %}
     </div>
     <div style="clear: right; margin-left: 5%;">
     {% if image_list %}

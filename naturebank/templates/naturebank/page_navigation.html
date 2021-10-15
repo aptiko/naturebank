@@ -1,0 +1,21 @@
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a class="prev" href="?page={{ page_obj.previous_page_number }}&{{ query_string_parms }}">‹‹ previous</a>
+  {% else %}
+    <span class="disabled prev">‹‹ previous</span>
+  {% endif %}
+
+  {% for i in 'x'|rjust:paginator.num_pages %}
+    {% if page_obj.number == forloop.counter %}
+      <span class="current page">{{ page_obj.number }}</span>
+    {% else %}
+      <a class="page" href="?page={{ forloop.counter }}&{{ query_string_parms }}">{{ forloop.counter }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="next" href="?page={{ page_obj.next_page_number }}&{{ query_string_parms }}">next ››</a>
+  {% else %}
+    <span class="disabled next">next ››</span>
+  {% endif %}
+</div>

@@ -18,7 +18,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'pagination.middleware.PaginationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
@@ -35,16 +34,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
 
-    # External Dependencies
     'django_filters',
-    'pagination',
+
     'naturebank',
 )
-
-##TEMPLATE_DIRS = ('/home/naturebank/nb/naturebank-filotis/templates/',)
-##STATICFILES_DIRS = ('/home/naturebank/nb/naturebank-filotis/static/',)
-
-PAGINATION_INVALID_PAGE_RAISES_404 = True
 
 STATIC_URL = '/static/'
 

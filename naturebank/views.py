@@ -44,6 +44,7 @@ def tos(request):
 
 class BiotopeListView(ListView):
     model = Biotope
+    paginate_by = 25
 
     def _remove_trailing_zeros(self, geo_code):
         """
@@ -102,6 +103,8 @@ class BiotopeListView(ListView):
         imagelist = BiotopeImage.objects.filter(biotope__in=self.object_list
                                                 ).order_by('?')[:5]
         context['image_list'] = imagelist
+        parms = self.request.GET.copy()
+        context["query_string_parms"] = parms.pop("page", True) and parms.urlencode()
         return context
 
 
@@ -163,6 +166,7 @@ class BiotopeDetailBriefView(DetailView):
 
 class SpeciesListView(ListView):
     model = Species
+    paginate_by = 20
 
     def get_queryset(self):
         f = SpeciesFilter(self.request.GET, self.queryset)
@@ -172,6 +176,8 @@ class SpeciesListView(ListView):
         context = super(SpeciesListView, self).get_context_data(**kwargs)
         f = SpeciesFilter(self.request.GET, self.queryset)
         context['form'] = f.form
+        parms = self.request.GET.copy()
+        context["query_string_parms"] = parms.pop("page", True) and parms.urlencode()
         return context
 
 

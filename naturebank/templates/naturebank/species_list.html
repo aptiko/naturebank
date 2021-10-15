@@ -1,14 +1,12 @@
 {% extends "base-nomap.html" %}
 {% load static %}
 {% load i18n %}
-{% load pagination_tags %}
 
 {% block title %}
 NatureBank - Είδη
 {% endblock %}
 
 {% block content_main %}
-    {% autopaginate object_list 20 %}
 <div id="mapandtextcontainer"><div id="detailtext">
     <fieldset style="margin: inherit auto; width: 50%;" class="compact">
         <form action="" method="get">
@@ -59,9 +57,8 @@ NatureBank - Είδη
     </tbody>
     </table>
 
-    <p>
-      <div>{% paginate %}</div>
-    </p>
+    <p></p>
+    {% include "naturebank/page_navigation.html" %}
 </div></div>
 {% endblock %}
 {% block extrajs %}
