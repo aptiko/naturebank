@@ -45,7 +45,7 @@ class AlphabeticalFilter(django_filters.ChoiceFilter):
 
 class SpeciesFilter(django_filters.FilterSet):
     species_name = AlphabeticalFilter(label=u'Αλφαβητική Επιλογή',
-                                      lookup_type='startswith',
+                                      lookup_expr='startswith',
                                       widget=django_filters.widgets.LinkWidget)
     class Meta:
         model = Species
