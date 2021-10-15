@@ -1,3 +1,4 @@
+from django.contrib.gis.db.models import Extent
 from django.db.models import Q
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -304,9 +305,11 @@ def bound(request):
     except Exception, e:
         raise Http404
     try:
-        result = ','.join([str(e) for e in queryres.extent()])
+        extent = queryres.aggregate(Extent("gis_mpoly"))
+        result = ",".join([str(x) for x in extent["gis_mpoly__extent"]])
     except TypeError:
-        result = ','.join([str(e) for e in Biotope.objects.all().extent()])
+        extent = Biotope.objects.all().aggregate(Extent("gis_mpoly"))
+        result = ",".join([str(x) for x in extent["gis_mpoly__extent"]])
     return HttpResponse(result, content_type='text/plain')
 
 def settlements_kml(request):

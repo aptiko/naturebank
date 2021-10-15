@@ -2,6 +2,7 @@
 # UTF8 Encoded
 
 from django.contrib.gis.db import models
+from django.core.validators import validate_comma_separated_integer_list
 from string import replace
 
 #Forward declaration
@@ -698,7 +699,11 @@ class BiotopeCategoryOption(models.Model):
 class GeoCodeOption(models.Model):
     """ A mapping of level 1,2,3 geocodes to the region names."""
 
-    code = models.CommaSeparatedIntegerField(max_length=10, primary_key=True)
+    code = models.CharField(
+        max_length=10,
+        primary_key=True,
+        validators=[validate_comma_separated_integer_list],
+    )
     name = models.CharField(max_length=300, blank=True,
         help_text="Το όνομα της γεωγραφικής περιοχής")
     name_eng = models.CharField(max_length=300, blank=True,
