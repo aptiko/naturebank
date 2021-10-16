@@ -3,7 +3,6 @@
 
 from django.contrib.gis.db import models
 from django.core.validators import validate_comma_separated_integer_list
-from string import replace
 
 #Forward declaration
 class Image:
@@ -23,14 +22,14 @@ class Biotope(models.Model):
     """
     # Core fields.
     site_code = models.CharField(max_length=54, unique=True,
-        verbose_name=u"Κωδικός Τόπου",
+        verbose_name="Κωδικός Τόπου",
         help_text=("Ο Κωδικός πρέπει να έχει πρόθεμα ένα εκ των \"ΑΤ\", "
                    "\"AΘ\", \"AG\", \"AB\" ή \"GR\"."))
     site_name = models.CharField(max_length=1440, blank=True,
-        verbose_name=u"Όνομα (Αγγλικά)",
+        verbose_name="Όνομα (Αγγλικά)",
         help_text="Η ονομασία του βιότοπου (Αγγλικά)")
     site_name_gr = models.CharField(max_length=1440, blank=True,
-        verbose_name=u"Όνομα (Ελληνικά)",
+        verbose_name="Όνομα (Ελληνικά)",
         help_text="Η ονομασία του βιότοπου (Ελληνικά)")
 
     # Category (Corine etc.)
@@ -40,73 +39,73 @@ class Biotope(models.Model):
 
     # Species relation through intermediate table.
     species = models.ManyToManyField('Species', through='SpeciesBiotope',
-        verbose_name=u"Είδη Τόπου",
-        help_text=u"Τα διάφορα είδη που απαντώνται στο τόπο.")
+        verbose_name="Είδη Τόπου",
+        help_text="Τα διάφορα είδη που απαντώνται στο τόπο.")
 
     # Designation relation through intermediate table.
     designation = models.ManyToManyField('DesignationOption',
-        verbose_name=u"Ένταξη σε Θεσμικό Πλαίσιο",
-        help_text=u"Οι κατηγορίες ένταξης σε θεσμικό πλαίσιο.")
+        verbose_name="Ένταξη σε Θεσμικό Πλαίσιο",
+        help_text="Οι κατηγορίες ένταξης σε θεσμικό πλαίσιο.")
 
     # Ownership relation through intermediate table.
     owner = models.ManyToManyField('OwnerOption',
-        verbose_name=u"Ιδιοκτησία",
-        help_text=u"Κατηγορίες ιδιοκτησίας.")
+        verbose_name="Ιδιοκτησία",
+        help_text="Κατηγορίες ιδιοκτησίας.")
 
     # Sitetype relation through intermediate table.
     site_type = models.ManyToManyField('SiteTypeOption',
-        verbose_name=u"Τύπος τοπίου",
-        help_text=u"Τύποι τοπίων.")
+        verbose_name="Τύπος τοπίου",
+        help_text="Τύποι τοπίων.")
 
     # Climate relation through intermediate table.
     climate = models.ManyToManyField('ClimateOption',
-        verbose_name=u"Κλίμα",
-        help_text=u"Τύποι κλίματος.")
+        verbose_name="Κλίμα",
+        help_text="Τύποι κλίματος.")
 
     # Ecological value relation through intermediate table.
     ecological_value = models.ManyToManyField('EcologicalValueOption',
-        verbose_name=u"Οικολογική",
-        help_text=u"Τύποι οικολογικής αξίας.")
+        verbose_name="Οικολογική",
+        help_text="Τύποι οικολογικής αξίας.")
 
     # Social value relation through intermediate table.
     social_value = models.ManyToManyField('SocialValueOption',
-        verbose_name=u"Κοινωνική, οικονομική και πολιτιστική",
-        help_text=u"Τύποι κοινωνικοοικονομικής/πολιτιστικής αξίας.")
+        verbose_name="Κοινωνική, οικονομική και πολιτιστική",
+        help_text="Τύποι κοινωνικοοικονομικής/πολιτιστικής αξίας.")
 
     # Cultural value relation through intermediate table.
     cultural_value = models.ManyToManyField('CulturalValueOption',
-        verbose_name=u"Αισθητική",
-        help_text=u"Τύποι αισθητικής αξίας")
+        verbose_name="Αισθητική",
+        help_text="Τύποι αισθητικής αξίας")
 
     # Threat relation through intermediate table.
     threat = models.ManyToManyField('ThreatOption',
-        verbose_name=u"Απειλές",
-        help_text=u"Κατηγορίες απειλών")
+        verbose_name="Απειλές",
+        help_text="Κατηγορίες απειλών")
 
     # Human activity m2m
     human_activity = models.ManyToManyField('HumanActivityOption',
-        verbose_name=u"Ανθρώπινες δραστηρ.",
-        help_text=u"Κατηγορίες ανθρωπίνων δραστηριοτήτων")
+        verbose_name="Ανθρώπινες δραστηρ.",
+        help_text="Κατηγορίες ανθρωπίνων δραστηριοτήτων")
 
     # Habitation m2m
     habitation = models.ManyToManyField('HabitationOption',
-        verbose_name=u"Χαρακτηρ. Ενδιαιτήματα",
-        help_text=u"Κατηγορίες χαρακτηριστικών ενδιατημάτων")
+        verbose_name="Χαρακτηρ. Ενδιαιτήματα",
+        help_text="Κατηγορίες χαρακτηριστικών ενδιατημάτων")
 
     # Population trend field
     trend_pop = models.ForeignKey('TrendPopOption',null=True, blank=True,
-        verbose_name=u"Τάση πληθυσμού",
-        help_text=u"Τάση πληθυσμού")
+        verbose_name="Τάση πληθυσμού",
+        help_text="Τάση πληθυσμού")
 
     # Main Character (BIOTOPOS - FYSIKO TOPIO - DOMHMENO TOPIO)
     main_char_biotopos = models.BooleanField(default=False,
-        verbose_name=u"Βιότοπος",
+        verbose_name="Βιότοπος",
         help_text="Είναι Βιότοπος;")
     main_char_natural = models.BooleanField(default=False,
-        verbose_name=u"Φυσικό Τοπίο",
+        verbose_name="Φυσικό Τοπίο",
         help_text="Είναι Φυσικό Τοπίο;")
     main_char_built = models.BooleanField(default=False,
-        verbose_name=u"Δομημένο Τοπίο",
+        verbose_name="Δομημένο Τοπίο",
         help_text="Είναι Δομημένο Τοπίο;")
 
     # Geographical fields (BIOLOCATION).
@@ -116,16 +115,16 @@ class Biotope(models.Model):
 
     # Geographical Region Codes.
     reg_code_1 = models.CharField(max_length=24, blank=True,
-        verbose_name=u"Γεωγραφικός κωδικός 1",
+        verbose_name="Γεωγραφικός κωδικός 1",
         help_text="Γεωγραφικός κωδικός 1")
     reg_code_2 = models.CharField(max_length=24, blank=True,
-        verbose_name=u"Γεωγραφικός κωδικός 2",
+        verbose_name="Γεωγραφικός κωδικός 2",
         help_text="Γεωγραφικός κωδικός 2")
     reg_code_3 = models.CharField(max_length=24, blank=True,
-        verbose_name=u"Γεωγραφικός κωδικός 3",
+        verbose_name="Γεωγραφικός κωδικός 3",
         help_text="Γεωγραφικός κωδικός 3")
     reg_code_4 = models.CharField(max_length=24, blank=True,
-        verbose_name=u"Γεωγραφικός κωδικός 4",
+        verbose_name="Γεωγραφικός κωδικός 4",
         help_text="Γεωγραφικός κωδικός 4")
 
     # Wide Area Code.
@@ -135,16 +134,16 @@ class Biotope(models.Model):
 
     # Date fields.
     creation_date = models.DateField(null=True, blank=True,
-        verbose_name=u"Ημερομηνία πρώτης καταχώρησης",
+        verbose_name="Ημερομηνία πρώτης καταχώρησης",
         help_text="Ημερομηνία πρώτης καταχώρησης")
     update_date = models.DateField(null=True, blank=True,
-        verbose_name=u"Ημερομηνία τελευταίας καταχώρησης",
+        verbose_name="Ημερομηνία τελευταίας καταχώρησης",
         help_text="Ημερομηνία τελευταίας καταχώρησης")
     date_old = models.CharField(max_length=36, blank=True,
-        verbose_name=u"Ημερομηνία δημιουργίας παλιάς καταχώρησης",
+        verbose_name="Ημερομηνία δημιουργίας παλιάς καταχώρησης",
         help_text="Ημερομηνία δημιουργίας παλιάς καταχώρησης")
     update_old = models.CharField(max_length=36, blank=True,
-        verbose_name=u"Ημερομηνία τελευταίας ανανέωσης στην παλιά βάση",
+        verbose_name="Ημερομηνία τελευταίας ανανέωσης στην παλιά βάση",
         help_text="Ημερομηνία τελευταίας ανανέωσης στην παλιά καταχώρηση")
 
     # Abandonment
@@ -154,74 +153,74 @@ class Biotope(models.Model):
 
      # Composite Code.
     comp_code = models.CharField(max_length=54, blank=True,
-        verbose_name=u"Κωδικός Σύνθετου Τόπου",
+        verbose_name="Κωδικός Σύνθετου Τόπου",
         help_text="Κωδικός σύνθετου τόπου")
     comp_name = models.CharField(max_length=1440, blank=True,
-        verbose_name=u"Όνομα Σύνθετου Τόπου",
+        verbose_name="Όνομα Σύνθετου Τόπου",
         help_text="Όνομα σύνθετου τόπου")
 
     # Region, Municipality names
     dist_name = models.CharField(max_length=1440, blank=True,
-        verbose_name=u"Άλλη γεωγραφική ενότητα",
+        verbose_name="Άλλη γεωγραφική ενότητα",
         help_text="Άλλη γεωγραφική ενότητα")
     reg_mun = models.CharField(max_length=480, blank=True,
-        verbose_name=u"Δήμος - Κοινότητα",
+        verbose_name="Δήμος - Κοινότητα",
         help_text="Δήμος - Κοινότητα")
 
     # Size of area.
     area = models.FloatField(null=True, blank=True,
-        verbose_name=u"Συνολική έκταση",
+        verbose_name="Συνολική έκταση",
         help_text="Συνολική έκταση βιοτόπου")
     area_l = models.FloatField(null=True, blank=True,
-        verbose_name=u"Χερσαία έκταση",
+        verbose_name="Χερσαία έκταση",
         help_text="Χερσαία έκταση βιοτόπου")
     area_s = models.FloatField(null=True, blank=True,
-        verbose_name=u"Θαλάσσια έκταση",
+        verbose_name="Θαλάσσια έκταση",
         help_text="Θαλάσσια έκταση βιοτόπου")
 
     # GeoCode Lon/Lat
     long_deg = models.FloatField(null=True, blank=True,
-        verbose_name=u"Longitude (μοίρες)",
+        verbose_name="Longitude (μοίρες)",
         help_text="Οι μοίρες (degrees) του longitude (λ)")
     long_min = models.FloatField(null=True, blank=True,
-        verbose_name=u"Longitude (λεπτά)",
+        verbose_name="Longitude (λεπτά)",
         help_text="Τα πρώτα λεπτά (minutes) του longitude (λ)")
     long_sec = models.FloatField(null=True, blank=True,
-        verbose_name=u"Longitude (δεύτερα)",
+        verbose_name="Longitude (δεύτερα)",
         help_text="Τα δεύτερα λεπτά (seconds) του longitude (λ)")
     lat_deg = models.FloatField(null=True, blank=True,
-        verbose_name=u"Latitude (μοίρες)",
+        verbose_name="Latitude (μοίρες)",
         help_text="Οι μοίρες (degrees) του latitude.")
     lat_min = models.FloatField(null=True, blank=True,
-        verbose_name=u"Latitude (λεπτά)",
+        verbose_name="Latitude (λεπτά)",
         help_text="Τα πρώτα λεπτά (minutes) του latitude.")
     lat_sec = models.FloatField(null=True, blank=True,
-        verbose_name=u"Latitude (δεύτερα)",
+        verbose_name="Latitude (δεύτερα)",
         help_text="Τα δεύτερα λεπτά (seconds) του latitude")
 
     # Altitude, Length, Width
     alt_mean = models.FloatField(null=True, blank=True,
-        verbose_name=u"Μέσο υψόμετρο",
+        verbose_name="Μέσο υψόμετρο",
         help_text="Μέσο υψόμετρο (δεκαδικός αριθμός)")
     alt_max = models.FloatField(null=True, blank=True,
-        verbose_name=u"Μέγιστο υψόμετρο",
+        verbose_name="Μέγιστο υψόμετρο",
         help_text="Μέγιστο υψόμετρο (δεκαδικός αριθμός)")
     alt_min = models.FloatField(null=True, blank=True,
-        verbose_name=u"Ελάχιστο υψόμετρο",
+        verbose_name="Ελάχιστο υψόμετρο",
         help_text="Ελάχιστο υψόμετρο (δεκαδικός αριθμός)")
     length_max = models.FloatField(null=True, blank=True,
-        verbose_name=u"Μέγιστο μήκος",
+        verbose_name="Μέγιστο μήκος",
         help_text="Μέγιστο μήκος (δεκαδικός αριθμός)")
     width_max = models.FloatField(null=True, blank=True,
-        verbose_name=u"Μέγιστο πλάτος",
+        verbose_name="Μέγιστο πλάτος",
         help_text="Μέγιστο πλάτος (δεκαδικός αριθμός)")
 
     # Text
     respondent = models.TextField(blank=True,
-        verbose_name=u"Στοιχεία Καταχωρητή",
+        verbose_name="Στοιχεία Καταχωρητή",
         help_text="Αναλυτική περιγραφή των στοιχείων του καταχωρητή")
     document = models.TextField(blank=True,
-                                verbose_name=u"Πηγές και Αναφορές",
+                                verbose_name="Πηγές και Αναφορές",
                                 help_text=("Πηγές, βιβλιογραφία και αναφορές "
                                            "από όπου αντλήθηκαν τα δεδομένα."))
 
@@ -301,10 +300,10 @@ class Biotope(models.Model):
 
     # Introduction (Short Text/ Text)
     introduct = models.CharField(max_length=24, blank=True,
-        verbose_name=u"Μικρός Τίτλος",
+        verbose_name="Μικρός Τίτλος",
         help_text="Μικρός τίτλος")
     intro_text = models.TextField(blank=True,
-        verbose_name=u"Εισαγωγικό Κείμενο",
+        verbose_name="Εισαγωγικό Κείμενο",
         help_text="Εισαγωγικό κείμενο")
 
     # Social Reaction
@@ -317,7 +316,7 @@ class Biotope(models.Model):
 
     # Development (Text)
     develop = models.TextField(blank=True,
-        verbose_name=u"Περιγραφή Εξέλιξης Τόπου",
+        verbose_name="Περιγραφή Εξέλιξης Τόπου",
         help_text="Περιγραφή εξέλιξης του τόπου")
 
     # Conservation (Foreign Key Relation)
@@ -417,7 +416,7 @@ class Biotope(models.Model):
                 result = True
         else:
             asite_code = self.site_code
-            asite_code = replace(asite_code, "AE", "A0")
+            asite_code = asite_code.replace("AE", "A0")
             aobj = Biotope.objects.filter(site_code=asite_code)
             if aobj is not None and len(aobj)>0:
                 if aobj[0].gis_mpoly:
@@ -431,7 +430,7 @@ class Biotope(models.Model):
         verbose_name_plural="Βιότοποι"
         ordering = ["site_name_gr"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.site_name_gr: return "%s" % self.site_name_gr
         else: return "%s | N/A" % (self.site_code,)
 
@@ -446,28 +445,28 @@ class TempDelete(models.Model):
     gis_objects = models.GeoManager()
 
     class Meta:
-            db_table = u'temp_delete'
+            db_table = 'temp_delete'
 
 #Biotope images
 
 class BiotopeImage(models.Model):
     biotope = models.ForeignKey(Biotope,
-                                verbose_name=u"Τόπος", help_text="Εξωτερική αναφορά σε τόπο")
+                                verbose_name="Τόπος", help_text="Εξωτερική αναφορά σε τόπο")
     image = models.ImageField(upload_to='SitesPhotos/',
-                                verbose_name=u"Εικόνα", help_text="Αρχείο εικόνας")
+                                verbose_name="Εικόνα", help_text="Αρχείο εικόνας")
     descr = models.CharField(max_length=80,
-                                verbose_name=u"Περιγραφή", help_text="Σύντομη περιγραφή φωτογραφίας",
+                                verbose_name="Περιγραφή", help_text="Σύντομη περιγραφή φωτογραφίας",
                                 blank=True)
     order = models.IntegerField(blank=True, null=True,
-                                verbose_name=u"Σειρά", help_text="Σειρά εμφάνισης φωτογραφίας")
+                                verbose_name="Σειρά", help_text="Σειρά εμφάνισης φωτογραφίας")
     remarks = models.TextField(blank=True,
-                                verbose_name=u"Σχόλια", help_text="Σχόλια για την εικόνα")
+                                verbose_name="Σχόλια", help_text="Σχόλια για την εικόνα")
     thumbnail = models.ImageField(upload_to="SitesPhotos/thumbs/", editable=False,
-                                verbose_name=u"Εικόνα προεπισκόπισης", help_text="Δείγμα (thumbnail) εικόνας")
+                                verbose_name="Εικόνα προεπισκόπισης", help_text="Δείγμα (thumbnail) εικόνας")
     def save(self):
         if True: #not self.thumbnail:
             from PIL import Image as ImageClass
-            from cStringIO import StringIO
+            from io import StringIO
             from django.core.files.uploadedfile import SimpleUploadedFile
             import os
             THUMBNAIL_SIZE = (160, 160)
@@ -486,7 +485,7 @@ class BiotopeImage(models.Model):
         super(BiotopeImage, self).save()
     class Admin:
         pass
-    def __unicode__(self):
+    def __str__(self):
         return self.descr
     class Meta:
         unique_together = (("biotope", "image"),
@@ -507,7 +506,7 @@ class HabitationOption(models.Model):
         verbose_name_plural="Κατηγορίες ενδιαιτημάτων"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -523,7 +522,7 @@ class TrendPopOption(models.Model):
         verbose_name_plural="Κατηγορίες τάσης πληθυσμού"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -540,7 +539,7 @@ class HumanActivityOption(models.Model):
         verbose_name_plural="Ανθρώπινες δραστηριότητες"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -557,7 +556,7 @@ class ThreatOption(models.Model):
         verbose_name_plural="Κατηγορίες απειλών"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -574,7 +573,7 @@ class CulturalValueOption(models.Model):
         verbose_name_plural="Αισθητικές αξίες"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -591,7 +590,7 @@ class SocialValueOption(models.Model):
         verbose_name_plural="Κοιν/πολιτιστικές αξίες"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -608,7 +607,7 @@ class EcologicalValueOption(models.Model):
         verbose_name_plural="Οικολογικές αξίες"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -625,7 +624,7 @@ class ClimateOption(models.Model):
         verbose_name_plural="Τύποι κλίματος"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -642,7 +641,7 @@ class SiteTypeOption(models.Model):
         verbose_name_plural="Τύποι τόπων"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -658,7 +657,7 @@ class OwnerOption(models.Model):
         verbose_name_plural="Κατηγορίες ιδιοκτησίας τόπου"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -675,7 +674,7 @@ class DesignationOption(models.Model):
         verbose_name_plural="Κατηγορίες ένταξης"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -691,7 +690,7 @@ class BiotopeCategoryOption(models.Model):
         verbose_name_plural="Κατηγορίες τοπίων"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -714,9 +713,10 @@ class GeoCodeOption(models.Model):
         verbose_name_plural="Γεωγραφικές ενότητες"
         ordering = ["name","name_eng"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.code,)
+
 
 class ConditionOption(models.Model):
     """Options for biotope conditions
@@ -735,7 +735,7 @@ class ConditionOption(models.Model):
         verbose_name_plural="Καταστάσεις βιότοπου"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -758,7 +758,7 @@ class TrendOption(models.Model):
         verbose_name_plural="Τάσεις κατάστασης βιότοπου"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -780,7 +780,7 @@ class KnowledgeOption(models.Model):
         verbose_name_plural="Καταστάσεις γνώσης βιότοπου"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -802,7 +802,7 @@ class SocialReactionOption(models.Model):
         verbose_name_plural="Κοινωνικές αντιδράσεις"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -819,7 +819,7 @@ class ConservationOption(models.Model):
         verbose_name_plural="Προτεραιότητες προστασίας"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -841,7 +841,7 @@ class WideArea(models.Model):
         verbose_name_plural = "Ευρύτερες γεωγραφικές περιοχές"
         ordering = ["wide_area_name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.wide_area_name: return "%s" % self.wide_area_name
         else: return "%s | N/A" % (self.id,)
 
@@ -862,7 +862,7 @@ class AbandonmentOption(models.Model):
         verbose_name_plural="Επίπεδα εγκατάλειψης"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.id,)
 
@@ -879,190 +879,190 @@ class Species(models.Model):
 
     # Core fields
     species_code = models.IntegerField(null=False, unique=True,
-        verbose_name=u"Κωδικός Είδους",
+        verbose_name="Κωδικός Είδους",
         help_text="Κωδικός είδους")
     species_name = models.CharField(max_length=720, blank=True,
-        verbose_name=u"Όνομα Είδους (Αγγλικά)",
+        verbose_name="Όνομα Είδους (Αγγλικά)",
         help_text="Αγγλική ονομασία είδους")
     sub_species = models.CharField(max_length=720, blank=True,
-        verbose_name=u"Όνομα Υποείδους (Αγγλικά)",
+        verbose_name="Όνομα Υποείδους (Αγγλικά)",
         help_text="Αγγλική ονομασία υποείδους")
     species_category = models.ForeignKey('SpeciesCategoryOption', null=True,
         verbose_name="Κατηγορία Είδους",
         blank=True, help_text="Κατηγορία χλωρίδας/πανίδας που ανήκει το είδος.")
     other_names = models.CharField(max_length=960, blank=True,
-        verbose_name=u"Άλλες Ονομασίες",
+        verbose_name="Άλλες Ονομασίες",
         help_text="Άλλες ονομασίες του ίδιου είδους")
     species_name_gr = models.CharField(max_length=720, blank=True,
-        verbose_name=u"Όνομα Είδους (Ελληνικά)",
+        verbose_name="Όνομα Είδους (Ελληνικά)",
         help_text="Ελληνική ονομασία είδους")
     plant_kind = models.ForeignKey('SpeciesPlantKindOption', null=True,
         verbose_name="Κατηγορία Φυτού",blank=True,
         help_text=("Υποκατηγορία για φυτό (Αν δεν είναι φυτό πρέπει"
         " να αφεθεί κενό)"))
     knowledge = models.ForeignKey('SpeciesKnowledgeOption', null=True,
-        blank=True, verbose_name=u"Γνώση",
+        blank=True, verbose_name="Γνώση",
         help_text="Το επίπεδο γνώσης στο συγκεκριμένο είδος")
     habitat = models.CharField(max_length=720, blank=True,
-        verbose_name=u"Ενδιαιτήματα",
+        verbose_name="Ενδιαιτήματα",
         help_text="Στοιχεία σχετικά με τα ενδιαιτήματα")
     expansion = models.CharField(max_length=960, blank=True,
-        verbose_name=u"Εξάπλωση",
+        verbose_name="Εξάπλωση",
         help_text="Στοιχεία εξάπλωσης του είδους")
     origin = models.CharField(max_length=18, blank=True,
-        verbose_name=u"Προέλευση",
+        verbose_name="Προέλευση",
         help_text="Στοιχεία προέλευσης του είδους")
 
     # Date fields.and Respondent
     creation_date = models.DateField(null=True, blank=True,
-        verbose_name=u"Ημ/νία Πρώτης Καταχώρησης",
+        verbose_name="Ημ/νία Πρώτης Καταχώρησης",
         help_text="Ημερομηνία πρώτης καταχώρησης")
     update_date = models.DateField(null=True, blank=True,
-        verbose_name=u"Ημ/νία Τελευταίας Καταχώρησης",
+        verbose_name="Ημ/νία Τελευταίας Καταχώρησης",
         help_text="Ημερομηνία τελευταίας καταχώρησης")
     respondent = models.TextField(blank=True,
-        verbose_name=u"Στοιχεία Καταχωρητή",
+        verbose_name="Στοιχεία Καταχωρητή",
         help_text="Στοιχεία καταχωρητή")
 
     # Protection and Growth
     protection = models.ForeignKey('SpeciesProtectionOption', null=True,
-        verbose_name=u"Προστασία",
+        verbose_name="Προστασία",
         blank=True, help_text="Επίπεδο προστασίας του είδους")
     conservation_prio = models.ForeignKey('SpeciesConservationPriorityOption',
-        verbose_name=u"Προτεραιότητα Προστασίας",
+        verbose_name="Προτεραιότητα Προστασίας",
         null=True, blank=True, help_text="Προτεραιότητα προστασίας")
     trend = models.ForeignKey('SpeciesTrendOption', null=True,
-        verbose_name=u"Τάση",
+        verbose_name="Τάση",
         blank=True, help_text="Ο ρυθμός ανάπτυξης του είδους")
     measures_take = models.TextField(blank=True,
-        verbose_name=u"Ληφθέντα Μέτρα",
+        verbose_name="Ληφθέντα Μέτρα",
         help_text="Μέτρα προστασίας που έχουν ληφθεί.")
     measures_need = models.TextField(blank=True,
-        verbose_name=u"Αναγκαία Μέτρα",
+        verbose_name="Αναγκαία Μέτρα",
         help_text="Μέτρα προστασίας που είναι αναγκαία.")
 
     # Conservation
     conservation_gr = models.ForeignKey('SpeciesConservationOption', null=True,
-        verbose_name=u"Ελλάδα",
+        verbose_name="Ελλάδα",
         related_name="species_conservation_gr_set", blank=True,
         help_text="Κατάσταση διατήρησης του είδους στην Ελλάδα")
     conservation_eec = models.ForeignKey('SpeciesConservationOption', null=True,
-        verbose_name=u"Ευρωπαϊκή Ένωση",
+        verbose_name="Ευρωπαϊκή Ένωση",
         related_name="species_conservation_eec_set", blank=True,
         help_text="Κατάσταση διατήρησης του είδους στην Ευρωπαική Ένωση")
     conservation_bio = models.ForeignKey('SpeciesConservationOption', null=True,
-        verbose_name=u"Βιόσφαιρα",
+        verbose_name="Βιόσφαιρα",
         related_name="species_conservation_bio_set", blank=True,
         help_text="Κατάσταση διατήρησης του είδους στην Βιόσφαιρα")
 
     # Rarity
     rarity_gr = models.ForeignKey('SpeciesRarityOption', null=True,
-        verbose_name=u"Ελλάδα",
+        verbose_name="Ελλάδα",
         related_name="species_rarity_gr_set", blank=True,
         help_text="Σπανιότητα του είδους στην Ελλάδα")
     rarity_eec = models.ForeignKey('SpeciesRarityOption', null=True,
-        verbose_name=u"Ευρωπαϊκή Ένωση",
+        verbose_name="Ευρωπαϊκή Ένωση",
         related_name="species_rarity_eec_set", blank=True,
         help_text="Σπανιότητα του είδους στην Ευρωπαική Ένωση")
     rarity_bio = models.ForeignKey('SpeciesRarityOption', null=True,
-        verbose_name=u"Βιόσφαιρα",
+        verbose_name="Βιόσφαιρα",
         related_name="species_rarity_bio_set", blank=True,
         help_text="Σπανιότητα του είδους στην Βιόσφαιρα")
 
     # Threats (Boolean)
     threat_hunt = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Κυνήγι",
+        verbose_name="Κυνήγι",
         help_text="Απειλή από το κυνήγι")
     threat_fish = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Αλιεία",
+        verbose_name="Αλιεία",
         help_text="Απειλή από την αλιεία")
     threat_coll = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Συλλογή",
+        verbose_name="Συλλογή",
         help_text="Απειλή από την συλλογή")
     threat_fore = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Υλοτομία",
+        verbose_name="Υλοτομία",
         help_text="Απειλή από την υλοτομία")
     threat_graz = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Βοσκή",
+        verbose_name="Βοσκή",
         help_text="Απειλή από την βοσκή")
     threat_poll = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Ρύπανση",
+        verbose_name="Ρύπανση",
         help_text="Απειλή από την ρύπανση")
     threat_cult = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Καλλιέργεια",
+        verbose_name="Καλλιέργεια",
         help_text="Απειλή από την καλλιέργεια")
     threat_tour = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Τουρισμός",
+        verbose_name="Τουρισμός",
         help_text="Απειλή από τον τουρισμό")
     threat_road = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Διάνοιξη Δρόμων",
+        verbose_name="Διάνοιξη Δρόμων",
         help_text="Απειλή από την διάνοιξη δρόμων")
     threat_buil = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Δόμηση",
+        verbose_name="Δόμηση",
         help_text="Απειλή από την δόμηση")
     threat_drai = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Αποξήρανση",
+        verbose_name="Αποξήρανση",
         help_text="Απειλή από την αποξήρανση")
     threat_eutr = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Ευτροφισμός",
+        verbose_name="Ευτροφισμός",
         help_text="Απειλή από τον ευτροφισμό")
     threat_pest = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Φυτοφάρμακα",
+        verbose_name="Φυτοφάρμακα",
         help_text="Απειλή από τα φυτοφάρμακα")
     threat_other = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Άλλες Απειλές",
+        verbose_name="Άλλες Απειλές",
         help_text="Άλλες απειλές")
     threat = models.TextField(blank=True,
-        verbose_name=u"Σχόλια",
+        verbose_name="Σχόλια",
         help_text="Περιγραφή απειλών και κινδύνων")
 
     # Attributes (Boolean)
     category_ende = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Ενδημικό",
+        verbose_name="Ενδημικό",
         help_text="Είναι ενδημικό")
     category_migr = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Μεταναστευτικό",
+        verbose_name="Μεταναστευτικό",
         help_text="Είναι μεταναστευτικό")
     category_bree = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Αναπαραγόμενο",
+        verbose_name="Αναπαραγόμενο",
         help_text="Είναι αναπαραγόμενο")
     category_resi = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Μόνιμος Κάτοικος",
+        verbose_name="Μόνιμος Κάτοικος",
         help_text="Κατοικεί μόνιμα")
     category_intr = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Εισαχθέν",
+        verbose_name="Εισαχθέν",
         help_text="Είναι εισαχθέν")
     category = models.TextField(blank=True,
-        verbose_name=u"Σχόλια",
+        verbose_name="Σχόλια",
         help_text="Σχόλια για τα γνωρίσματα")
 
     # Exploitation (Boolean)
     exploit_hunt = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Κυνήγι",
+        verbose_name="Κυνήγι",
         help_text="Εκμετάλλευση από το κυνήγι")
     exploit_fish = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Αλιεία",
+        verbose_name="Αλιεία",
         help_text="Εκμετάλλευση από το αλιεία")
     exploit_coll = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Συλλογή",
+        verbose_name="Συλλογή",
         help_text="Εκμετάλλευση από τη σύλλογη")
     exploit_logg = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Υλοτομία",
+        verbose_name="Υλοτομία",
         help_text="Εκμετάλλευση από την υλοτομία")
     exploit_graz = models.BooleanField(blank=True, default=False,
-        verbose_name=u"Βοσκή",
+        verbose_name="Βοσκή",
         help_text="Εκμετάλλευση από τη βοσκή")
 
     # Photo Field
     photo = models.ImageField(upload_to="SitesPhotos", blank=True,
-        verbose_name=u"Φωτογραφία",
+        verbose_name="Φωτογραφία",
         help_text="Το path προς τη φωτογραφία του τόπου")
 
     class Meta:
         verbose_name_plural="Species"
         ordering = ["species_name", "sub_species", "species_code"]
 
-    def __unicode__(self):
+    def __str__(self):
         #to_return = unicode(self.species_code)
         to_return = ""
         if self.species_name:
@@ -1087,30 +1087,30 @@ class SpeciesBiotope(models.Model):
 
     # Core fields
     species = models.ForeignKey('Species',
-        verbose_name=u"Είδος",
-        help_text=u"Είδος Ζώου/Φυτού")
+        verbose_name="Είδος",
+        help_text="Είδος Ζώου/Φυτού")
     biotope = models.ForeignKey('Biotope',
-        verbose_name=u"Τόπος",
-        help_text=u"Βιότοπος")
+        verbose_name="Τόπος",
+        help_text="Βιότοπος")
     abundance = models.IntegerField(null=True, blank=True,
-        verbose_name=u"Πληθυσμός",
-        help_text=u"Η αφθονία του είδους στο συγκεκριμένο βιότοπο")
+        verbose_name="Πληθυσμός",
+        help_text="Η αφθονία του είδους στο συγκεκριμένο βιότοπο")
 
     class Meta:
-        verbose_name=u"Συσχέτιση Είδους με Βιότοπο"
-        verbose_name_plural=u"Συσχετίσεις Είδους με Βιότοπο"
+        verbose_name="Συσχέτιση Είδους με Βιότοπο"
+        verbose_name_plural="Συσχετίσεις Είδους με Βιότοπο"
         unique_together = (('biotope', 'species'),)
 
-    def __unicode__(self):
-        to_return = u""
+    def __str__(self):
+        to_return = ""
         if self.species:
-            to_return += u" %s" % (unicode(self.species),)
+            to_return += " %s" % (str(self.species),)
         else:
-            to_return += u" N/A"
+            to_return += " N/A"
         if self.biotope:
-            to_return += u" -- %s" % (unicode(self.biotope),)
+            to_return += " -- %s" % (str(self.biotope),)
         else:
-            to_return += u" -- N/A"
+            to_return += " -- N/A"
         return to_return
 
 #### #### #### SECONDARY SPECIES-RELATED TABLES #### #### ####
@@ -1130,7 +1130,7 @@ class SpeciesCategoryOption(models.Model):
         verbose_name_plural="Κατηγορίες πανίδας/χλωρίδας"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1149,7 +1149,7 @@ class SpeciesPlantKindOption(models.Model):
         verbose_name_plural="Κατηγορίες φυτών"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1168,7 +1168,7 @@ class SpeciesKnowledgeOption(models.Model):
         verbose_name_plural="Επίπεδα γνώσης είδους"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1187,7 +1187,7 @@ class SpeciesProtectionOption(models.Model):
         verbose_name_plural="Επίπεδα προστασίας είδους"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1206,7 +1206,7 @@ class SpeciesConservationPriorityOption(models.Model):
         verbose_name_plural="Προτεραιότητες προστασίας είδους"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1225,7 +1225,7 @@ class SpeciesTrendOption(models.Model):
         verbose_name_plural="Ρυθμοί ανάπτυξης είδους"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" %  self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1244,7 +1244,7 @@ class SpeciesConservationOption(models.Model):
         verbose_name_plural="Επίπεδα διατήρησης είδους"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1263,7 +1263,7 @@ class SpeciesRarityOption(models.Model):
         verbose_name_plural="Βαθμοί σπανιότητας είδους"
         ordering = ["name"]
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name: return "%s" % self.name
         else: return "%s | N/A" % (self.abbreviation,)
 
@@ -1280,5 +1280,5 @@ class Settlement(models.Model):
         verbose_name="Οικισμός"
         verbose_name_plural="Οικισμοί"
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name

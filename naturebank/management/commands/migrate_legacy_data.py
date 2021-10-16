@@ -152,7 +152,7 @@ class Command(BaseCommand):
                     draft.species_category = SpeciesCategoryOption.objects.get(
                                                 abbreviation=val)
             except SpeciesCategoryOption.DoesNotExist:
-                print "SpeciesCategoryOption entry does not exist"
+                print("SpeciesCategoryOption entry does not exist")
 
             try:
                 val = entry.organism
@@ -160,7 +160,7 @@ class Command(BaseCommand):
                     draft.plant_kind = SpeciesPlantKindOption.objects.get(
                                     abbreviation=val)
             except SpeciesPlantKindOption.DoesNotExist:
-                print "SpeciesPlantKindOption entry does not exist"
+                print("SpeciesPlantKindOption entry does not exist")
 
             
             try:
@@ -169,7 +169,7 @@ class Command(BaseCommand):
                     draft.knowledge = SpeciesKnowledgeOption.objects.get(
                                     abbreviation=val)
             except SpeciesKnowledgeOption.DoesNotExist:
-                print "SpeciesKnowledgeOption entry does not exist"
+                print("SpeciesKnowledgeOption entry does not exist")
 
             
             try:
@@ -178,7 +178,7 @@ class Command(BaseCommand):
                     draft.protection = SpeciesProtectionOption.objects.get(
                                     abbreviation=val)
             except SpeciesProtectionOption.DoesNotExist:
-                print "SpeciesProtectionOption entry does not exist"
+                print("SpeciesProtectionOption entry does not exist")
 
 
             
@@ -188,7 +188,7 @@ class Command(BaseCommand):
                     draft.conservation_prio = SpeciesConservationPriorityOption.objects.get(
                                     abbreviation=val)
             except SpeciesConservationPriorityOption.DoesNotExist:
-                print "SpeciesConservationPriorityOption entry does not exist"
+                print("SpeciesConservationPriorityOption entry does not exist")
 
             
             try:
@@ -197,7 +197,7 @@ class Command(BaseCommand):
                     draft.trend = SpeciesTrendOption.objects.get(
                                     abbreviation=val)
             except SpeciesTrendOption.DoesNotExist:
-                print "SpeciesTrendOption entry does not exist"
+                print("SpeciesTrendOption entry does not exist")
 
             
             try:
@@ -206,7 +206,7 @@ class Command(BaseCommand):
                     draft.conservation_gr = SpeciesConservationOption.objects.get(
                                     abbreviation=val)
             except SpeciesConservationOption.DoesNotExist:
-                print "SpeciesConservationOption entry does not exist"
+                print("SpeciesConservationOption entry does not exist")
 
             
             try:
@@ -215,7 +215,7 @@ class Command(BaseCommand):
                     draft.conservation_eec = SpeciesConservationOption.objects.get(
                                     abbreviation=val)
             except SpeciesConservationOption.DoesNotExist:
-                print "SpeciesConservationOption entry does not exist"
+                print("SpeciesConservationOption entry does not exist")
 
             
             try:
@@ -224,7 +224,7 @@ class Command(BaseCommand):
                     draft.conservation_bio = SpeciesConservationOption.objects.get(
                                     abbreviation=val)
             except SpeciesConservationOption.DoesNotExist:
-                print "SpeciesConservationOption entry does not exist"
+                print("SpeciesConservationOption entry does not exist")
 
             
             try:
@@ -233,7 +233,7 @@ class Command(BaseCommand):
                     draft.rarity_gr = SpeciesRarityOption.objects.get(
                                     abbreviation=val)
             except SpeciesRarityOption.DoesNotExist:
-                print "SpeciesRarityOption entry does not exist"
+                print("SpeciesRarityOption entry does not exist")
 
             
             try:
@@ -242,7 +242,7 @@ class Command(BaseCommand):
                     draft.rarity_eec = SpeciesRarityOption.objects.get(
                                     abbreviation=val)
             except SpeciesRarityOption.DoesNotExist:
-                print "SpeciesRarityOption entry does not exist"
+                print("SpeciesRarityOption entry does not exist")
 
             
             try:
@@ -251,7 +251,7 @@ class Command(BaseCommand):
                     draft.rarity_bio = SpeciesRarityOption.objects.get(
                                     abbreviation=val)
             except SpeciesRarityOption.DoesNotExist:
-                print "SpeciesRarityOption entry does not exist"
+                print("SpeciesRarityOption entry does not exist")
 
             draft.save()
 
@@ -359,7 +359,7 @@ class Command(BaseCommand):
         WideArea.objects.all().delete()
         lut = CodeWide.objects.all()
         for entry in lut:
-            if not entry.wide_code==u'':
+            if not entry.wide_code=='':
                 draft = WideArea(
                             id = int(entry.wide_code),
                             wide_area_name=entry.wide_name)
@@ -467,15 +467,15 @@ class Command(BaseCommand):
 
             # Foreign Keys Handling
             try:
-                if not entry.reg_wide.wide_code==u'':
+                if not entry.reg_wide.wide_code=='':
                     val = int(entry.reg_wide.wide_code)
                     if val:
                         draft.reg_wide = WideArea.objects.get(
                                                     pk=val)
             except WideArea.DoesNotExist:
-                print "WideArea entry does not exist"
+                print("WideArea entry does not exist")
             except CodeWide.DoesNotExist:
-                print "CodeWide entry does not exist"
+                print("CodeWide entry does not exist")
             
             try:
                 val = entry.abandon
@@ -483,9 +483,9 @@ class Command(BaseCommand):
                     draft.abandon = AbandonmentOption.objects.get(
                                                 pk=val.tag)
             except AbandonmentOption.DoesNotExist:
-                print "AbandonmentOption entry does not exist"
+                print("AbandonmentOption entry does not exist")
             except OptAbandon.DoesNotExist:
-                print "OptAbandon entry does not exist"
+                print("OptAbandon entry does not exist")
             # TODO: Migrate Species relation through intermediate table.
                 
             draft.save()
@@ -507,9 +507,9 @@ class Command(BaseCommand):
                         draft.trend_pop = tpo
                         draft.save()
                 except TrendPopOption.DoesNotExist:
-                    print "TrendPopOption entry does not exist"
+                    print("TrendPopOption entry does not exist")
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
 
 
         lut = Lengthwidth.objects.all()
@@ -522,7 +522,7 @@ class Command(BaseCommand):
                 draft.width_max = entry.width
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
 
         lut = Biolocation.objects.all()
         for entry in lut:
@@ -534,9 +534,9 @@ class Command(BaseCommand):
                 draft.geo_code = g
                 draft.save()
             except GeoCodeOption.DoesNotExist:
-                print "GeoCodeOption entry does not exist"
+                print("GeoCodeOption entry does not exist")
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
 
         lut = Docu.objects.all()
         for entry in lut:
@@ -547,7 +547,7 @@ class Command(BaseCommand):
                 draft.document = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -560,7 +560,7 @@ class Command(BaseCommand):
                 draft.protection = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -573,7 +573,7 @@ class Command(BaseCommand):
                 draft.ownership_text = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -586,7 +586,7 @@ class Command(BaseCommand):
                 draft.geology = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -599,7 +599,7 @@ class Command(BaseCommand):
                 draft.characteristics = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -612,7 +612,7 @@ class Command(BaseCommand):
                 draft.history = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -625,7 +625,7 @@ class Command(BaseCommand):
                 draft.quality = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -638,7 +638,7 @@ class Command(BaseCommand):
                 draft.vulnerability = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -651,7 +651,7 @@ class Command(BaseCommand):
                 draft.tourism = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -664,7 +664,7 @@ class Command(BaseCommand):
                 draft.infrastructure = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -677,7 +677,7 @@ class Command(BaseCommand):
                 draft.view = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -690,7 +690,7 @@ class Command(BaseCommand):
                 draft.path = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -703,7 +703,7 @@ class Command(BaseCommand):
                 draft.species_text = entry.txt
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
                 print ("Biotopes legacy entry does not exist")
 
@@ -779,9 +779,9 @@ class Command(BaseCommand):
                         draft.condition = ConditionOption.objects.get(
                                                     pk=val.tag)
                 except ConditionOption.DoesNotExist:
-                    print "ConditionOption entry does not exist"
+                    print("ConditionOption entry does not exist")
                 except OptCondition.DoesNotExist:
-                    print "OptCondition entry does not exist"
+                    print("OptCondition entry does not exist")
 
                 # Trend 
                 try:
@@ -790,9 +790,9 @@ class Command(BaseCommand):
                         draft.trend = TrendOption.objects.get(
                                                     pk=val.tag)
                 except TrendOption.DoesNotExist:
-                    print "TrendOption entry does not exist"
+                    print("TrendOption entry does not exist")
                 except OptTrend.DoesNotExist:
-                    print "OptTrend entry does not exist"
+                    print("OptTrend entry does not exist")
 
                 # Knowledge 
                 try:
@@ -801,9 +801,9 @@ class Command(BaseCommand):
                         draft.knowledge = KnowledgeOption.objects.get(
                                                     pk=val.tag)
                 except KnowledgeOption.DoesNotExist:
-                    print "KnowledgeOption entry does not exist"
+                    print("KnowledgeOption entry does not exist")
                 except OptKnowledge.DoesNotExist:
-                    print "OptKnowledge entry does not exist"
+                    print("OptKnowledge entry does not exist")
 
                 # Social Reaction
                 try:
@@ -812,9 +812,9 @@ class Command(BaseCommand):
                         draft.social_reaction = SocialReactionOption.objects.get(
                                                     pk=val.tag)
                 except SocialReactionOption.DoesNotExist:
-                    print "SocialReactionOption entry does not exist"
+                    print("SocialReactionOption entry does not exist")
                 except OptSocial.DoesNotExist:
-                    print "OptSocial entry does not exist"
+                    print("OptSocial entry does not exist")
 
 
                 # Conservation 
@@ -824,13 +824,13 @@ class Command(BaseCommand):
                         draft.conservation = ConservationOption.objects.get(
                                                     pk=val.code_conserv)
                 except ConservationOption.DoesNotExist:
-                    print "ConservationOption entry does not exist"
+                    print("ConservationOption entry does not exist")
                 except CodeConserv.DoesNotExist:
-                    print "CodeConserv entry does not exist"
+                    print("CodeConserv entry does not exist")
 
                 draft.save()
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
 
         # Fill the M2M table for Biotope-OwnerOption
         m2m = OwnType.objects.all()
@@ -842,39 +842,39 @@ class Command(BaseCommand):
                         own = OwnerOption.objects.get(pk=1)
                         b.owner.add(own)
                     except OwnerOption.DoesNotExist:
-                        print "OwnerOption entry does not exist"
+                        print("OwnerOption entry does not exist")
                 if int(entry.own_koino):
                     try:
                         own = OwnerOption.objects.get(pk=2)
                         b.owner.add(own)
                     except OwnerOption.DoesNotExist:
-                        print "OwnerOption entry does not exist"
+                        print("OwnerOption entry does not exist")
                 if int(entry.own_idiot):
                     try:
                         own = OwnerOption.objects.get(pk=3)
                         b.owner.add(own)
                     except OwnerOption.DoesNotExist:
-                        print "OwnerOption entry does not exist"
+                        print("OwnerOption entry does not exist")
                 if int(entry.own_diak):
                     try:
                         own = OwnerOption.objects.get(pk=4)
                         b.owner.add(own)
                     except OwnerOption.DoesNotExist:
-                        print "OwnerOption entry does not exist"
+                        print("OwnerOption entry does not exist")
                 if int(entry.own_ekklh):
                     try:
                         own = OwnerOption.objects.get(pk=5)
                         b.owner.add(own)
                     except OwnerOption.DoesNotExist:
-                        print "OwnerOption entry does not exist"
+                        print("OwnerOption entry does not exist")
                 if int(entry.own_katap):
                     try:
                         own = OwnerOption.objects.get(pk=6)
                         b.owner.add(own)
                     except OwnerOption.DoesNotExist:
-                        print "OwnerOption entry does not exist"
+                        print("OwnerOption entry does not exist")
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
 
         # Fill the M2M table for Biotope-HabitationOption
@@ -884,10 +884,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = HabitationOption.objects.get(abbreviation=entry.codehabitation)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except HabitationOption.DoesNotExist:
-                print "HabitationOption entry does not exist"
+                print("HabitationOption entry does not exist")
                 continue
             b.habitation.add(d)
 
@@ -898,10 +898,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = HumanActivityOption.objects.get(abbreviation=entry.codehumanactivity)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except HumanActivityOption.DoesNotExist:
-                print "HumanActivityOption entry does not exist"
+                print("HumanActivityOption entry does not exist")
                 continue
             b.human_activity.add(d)
 
@@ -912,10 +912,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = ThreatOption.objects.get(abbreviation=entry.codethreat)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except ThreatOption.DoesNotExist:
-                print "ThreatOption entry does not exist"
+                print("ThreatOption entry does not exist")
                 continue
             b.threat.add(d)
 
@@ -926,10 +926,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = CulturalValueOption.objects.get(abbreviation=entry.codeculturalvalue)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except CulturalValueOption.DoesNotExist:
-                print "CulturalValueOption entry does not exist"
+                print("CulturalValueOption entry does not exist")
                 continue
             b.cultural_value.add(d)
 
@@ -940,10 +940,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = SocialValueOption.objects.get(abbreviation=entry.codesocialvalue)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except SocialValueOption.DoesNotExist:
-                print "SocialValueOption entry does not exist"
+                print("SocialValueOption entry does not exist")
                 continue
             b.social_value.add(d)
 
@@ -954,10 +954,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = EcologicalValueOption.objects.get(abbreviation=entry.codeecologicalvalue)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except EcologicalValueOption.DoesNotExist:
-                print "EcologicalValueOption entry does not exist"
+                print("EcologicalValueOption entry does not exist")
                 continue
             b.ecological_value.add(d)
 
@@ -968,10 +968,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = ClimateOption.objects.get(abbreviation=entry.codeclimate)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except ClimateOption.DoesNotExist:
-                print "ClimateOption entry does not exist"
+                print("ClimateOption entry does not exist")
                 continue
             b.climate.add(d)
 
@@ -982,10 +982,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = SiteTypeOption.objects.get(abbreviation=entry.codesitetype)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except SitetypeOption.DoesNotExist:
-                print "SitetypeOption entry does not exist"
+                print("SitetypeOption entry does not exist")
                 continue
             b.site_type.add(d)
 
@@ -996,10 +996,10 @@ class Command(BaseCommand):
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 d = DesignationOption.objects.get(abbreviation=entry.codedesignation)
             except Biotope.DoesNotExist:
-                print "Biotope entry does not exist"
+                print("Biotope entry does not exist")
                 continue
             except DesignationOption.DoesNotExist:
-                print "DesignationOption entry does not exist"
+                print("DesignationOption entry does not exist")
                 continue
             b.designation.add(d)
 
@@ -1011,12 +1011,12 @@ class Command(BaseCommand):
                 try:
                     sp = Species.objects.get(species_code=entry.speci_code.speci_code)
                 except Species.DoesNotExist:
-                    print "Species entry does not exist"
+                    print("Species entry does not exist")
                     continue
                 try:
                     b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 except Biotope.DoesNotExist:
-                    print "Biotope entry does not exist"
+                    print("Biotope entry does not exist")
                     continue
                 try:
                     ab = int(entry.abund)
@@ -1032,12 +1032,12 @@ class Command(BaseCommand):
 
         # Photos Handling
         for filename in os.listdir("%s/SitesPhotos" % settings.MEDIA_ROOT ):
-            print filename[:-4]
+            print(filename[:-4])
             try:
                 b = Biotope.objects.get(site_code=filename[:-4])
                 b.photo = "SitesPhotos/" + filename
                 b.save()
             except Biotope.DoesNotExist:
-                print "Entry does not exist"
+                print("Entry does not exist")
             except DjangoUnicodeDecodeError:
                 continue

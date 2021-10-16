@@ -13,7 +13,6 @@ from naturebank.filters import BiotopeFilter, SpeciesFilter
 from django.http import Http404, HttpResponse
 from django.contrib.gis.shortcuts import render_to_kml
 from django.contrib.gis.geos import Polygon
-from string import replace
 
 filter_keys = ('category', 'climate', 'site_type', 'habitation',
                'designation', 'condition', 'abandon',
@@ -207,10 +206,7 @@ def kml(request, layer):
     agentstring = request.META['HTTP_USER_AGENT']
     idx = agentstring.find('MSIE')
     isMSIE = (idx>-1) and (agentstring[idx:idx+6]!='MSIE 9')
-    try:
-        bbox=request.GET.get('BBOX', request.GET.get('bbox', None))
-    except Exception, e:
-        raise Http404
+    bbox=request.GET.get('BBOX', request.GET.get('bbox', None))
     geo_code = request.GET.get('geo_code', request.GET.get('GEO_CODE', None));
     if geo_code:
         geo_code = geo_code.split(',');
@@ -229,35 +225,31 @@ def kml(request, layer):
     species_id = request.GET.get('species', request.GET.get('SPECIES', None));
     single_category = (True if request.GET.get('single_category', request.GET.get('SINGLE_CATEGORY', "False"))=='True' else False)
     if bbox:
-        try:
-            minx, miny, maxx, maxy=[float(i) for i in bbox.split(',')]
-            geom=Polygon(((minx,miny),(minx,maxy),(maxx,maxy),(maxx,miny),(minx,miny)),srid=4326)
-            meansize=0.5*((maxx-minx)+(maxy-miny))
-            dxm=meansize/400
-            areatrigger=AREA_TRIGGER_PARAM*meansize*meansize
-        except Exception, e:
-            raise Http404
+        minx, miny, maxx, maxy=[float(i) for i in bbox.split(',')]
+        geom=Polygon(((minx,miny),(minx,maxy),(maxx,maxy),(maxx,miny),(minx,miny)),srid=4326)
+        meansize=0.5*((maxx-minx)+(maxy-miny))
+        dxm=meansize/400
+        areatrigger=AREA_TRIGGER_PARAM*meansize*meansize
     else:
         areatrigger=0
-    try:
-        queryres = Biotope.objects.filter(category=layers[layer])
-        order_lst = ['gis_zorder',]
-        if bbox:
-            queryres = queryres.filter(gis_mpoly__bboverlaps=geom)
-        rescount=queryres.count()
-        if geo_code:
-            queryres = queryres.filter(geo_code__code__startswith=geo_code)
-        if asite_code:
-            asite_code = replace(asite_code, "AE", "A0")
-            queryres = Biotope.objects.filter(site_code=asite_code)
-        queryres = queryres.filter(**filterargs)
-        if species_id:
-            queryres = queryres.filter(species__id=species_id)
-        if isMSIE:
-            order_lst = ['gis_zorder', '-gis_area',]
-        queryres = queryres.extra(order_by = order_lst)
-    except Exception, e:
-        raise Http404
+
+    queryres = Biotope.objects.filter(category=layers[layer])
+    order_lst = ['gis_zorder',]
+    if bbox:
+        queryres = queryres.filter(gis_mpoly__bboverlaps=geom)
+    rescount=queryres.count()
+    if geo_code:
+        queryres = queryres.filter(geo_code__code__startswith=geo_code)
+    if asite_code:
+        asite_code = asite_code.replace("AE", "A0")
+        queryres = Biotope.objects.filter(site_code=asite_code)
+    queryres = queryres.filter(**filterargs)
+    if species_id:
+        queryres = queryres.filter(species__id=species_id)
+    if isMSIE:
+        order_lst = ['gis_zorder', '-gis_area',]
+    queryres = queryres.extra(order_by = order_lst)
+
     acount = 0
     for arow in queryres:
         if isMSIE and acount>IELimit[single_category]:
@@ -292,18 +284,17 @@ def bound(request):
         while geo_code[-1]=='0':
             geo_code.pop()
         geo_code=','.join(geo_code)
-    try:
-        queryres = Biotope.objects.all()
-        if geo_code:
-            queryres = queryres.filter(geo_code__code__startswith=geo_code)
-        queryres = queryres.filter(**filterargs)
-        if asite_code:
-            asite_code = replace(asite_code, "AE", "A0")
-            queryres = Biotope.objects.filter(site_code=asite_code)
-        if species_id:
-            queryres = queryres.filter(species__id=species_id)
-    except Exception, e:
-        raise Http404
+
+    queryres = Biotope.objects.all()
+    if geo_code:
+        queryres = queryres.filter(geo_code__code__startswith=geo_code)
+    queryres = queryres.filter(**filterargs)
+    if asite_code:
+        asite_code = asite_code.replace("AE", "A0")
+        queryres = Biotope.objects.filter(site_code=asite_code)
+    if species_id:
+        queryres = queryres.filter(species__id=species_id)
+
     try:
         extent = queryres.aggregate(Extent("gis_mpoly"))
         result = ",".join([str(x) for x in extent["gis_mpoly__extent"]])
@@ -313,22 +304,16 @@ def bound(request):
     return HttpResponse(result, content_type='text/plain')
 
 def settlements_kml(request):
-    try:
-        bbox=request.GET.get('BBOX', request.GET.get('bbox', None))
-    except Exception, e:
-        raise Http404
+    bbox=request.GET.get('BBOX', request.GET.get('bbox', None))
     queryres = Settlement.objects.all().filter(point__isnull=False)
     if bbox:
-        try:
-            minx, miny, maxx, maxy=[float(i) for i in bbox.split(',')]
-            geom=Polygon(((minx, miny), (minx, maxy), (maxx, maxy),
-                                        (maxx, miny), (minx, miny)), srid=4326)
-            mean_size2=maxx-minx+maxy-miny
-            queryres = queryres.filter(point__contained=geom)
-            if mean_size2>1.6:
-                queryres = queryres.filter(area__gt=750000)
-        except Exception, e:
-            raise Http404
+        minx, miny, maxx, maxy=[float(i) for i in bbox.split(',')]
+        geom=Polygon(((minx, miny), (minx, maxy), (maxx, maxy),
+                                    (maxx, miny), (minx, miny)), srid=4326)
+        mean_size2=maxx-minx+maxy-miny
+        queryres = queryres.filter(point__contained=geom)
+        if mean_size2>1.6:
+            queryres = queryres.filter(area__gt=750000)
     for arow in queryres:
         if arow.point:
             arow.kml = arow.point.kml

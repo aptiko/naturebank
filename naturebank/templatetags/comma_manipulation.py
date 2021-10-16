@@ -36,7 +36,7 @@ def create_species_list(parser, token):
         # split_contents() knows not to split quoted strings.
         tag_name, species = token.split_contents()
     except ValueError:
-        raise TemplateSyntaxError, "%r tag requires exactly one argument" % token.contents.split()[0]
+        raise TemplateSyntaxError("%r tag requires exactly one argument" % token.contents.split()[0])
     return SpeciesListNode(species)
 
 
@@ -61,7 +61,7 @@ def create_category_list(parser, token):
         # split_contents() knows not to split quoted strings.
         tag_name, species = token.split_contents()
     except ValueError:
-        raise TemplateSyntaxError, "%r tag requires exactly one argument" % token.contents.split()[0]
+        raise TemplateSyntaxError("%r tag requires exactly one argument" % token.contents.split()[0])
     return CategoryListNode(species)
 
 
