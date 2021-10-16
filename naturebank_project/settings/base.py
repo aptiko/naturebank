@@ -14,12 +14,13 @@ TEMPLATES = [
                 "django.template.context_processors.media",
                 "django.template.context_processors.static",
                 "django.template.context_processors.request",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     }
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     "django.middleware.gzip.GZipMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     "django.contrib.gis",
     "django.contrib.staticfiles",
     "django.contrib.flatpages",
+    "django.contrib.messages",
     "django_filters",
     "naturebank",
 )

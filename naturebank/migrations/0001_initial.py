@@ -689,6 +689,7 @@ class Migration(migrations.Migration):
                 (
                     "abandon",
                     models.ForeignKey(
+                        on_delete=models.CASCADE,
                         blank=True,
                         to="naturebank.AbandonmentOption",
                         help_text=b"\xce\x95\xcf\x80\xce\xaf\xcf\x80\xce\xb5\xce\xb4\xce\xb1 \xce\xb5\xce\xb3\xce\xba\xce\xb1\xcf\x84\xce\xac\xce\xbb\xce\xb5\xce\xb9\xcf\x88\xce\xb7\xcf\x82 \xce\xbf\xce\xb9\xce\xba\xce\xb9\xcf\x83\xce\xbc\xcf\x8e\xce\xbd",
@@ -790,6 +791,7 @@ class Migration(migrations.Migration):
                 (
                     "biotope",
                     models.ForeignKey(
+                        on_delete=models.CASCADE,
                         verbose_name="\u03a4\u03cc\u03c0\u03bf\u03c2",
                         to="naturebank.Biotope",
                         help_text=b"\xce\x95\xce\xbe\xcf\x89\xcf\x84\xce\xb5\xcf\x81\xce\xb9\xce\xba\xce\xae \xce\xb1\xce\xbd\xce\xb1\xcf\x86\xce\xbf\xcf\x81\xce\xac \xcf\x83\xce\xb5 \xcf\x84\xcf\x8c\xcf\x80\xce\xbf",
@@ -1682,6 +1684,7 @@ class Migration(migrations.Migration):
                 (
                     "biotope",
                     models.ForeignKey(
+                        on_delete=models.CASCADE,
                         verbose_name="\u03a4\u03cc\u03c0\u03bf\u03c2",
                         to="naturebank.Biotope",
                         help_text="\u0392\u03b9\u03cc\u03c4\u03bf\u03c0\u03bf\u03c2",
@@ -1690,6 +1693,7 @@ class Migration(migrations.Migration):
                 (
                     "species",
                     models.ForeignKey(
+                        on_delete=models.CASCADE,
                         verbose_name="\u0395\u03af\u03b4\u03bf\u03c2",
                         to="naturebank.Species",
                         help_text="\u0395\u03af\u03b4\u03bf\u03c2 \u0396\u03ce\u03bf\u03c5/\u03a6\u03c5\u03c4\u03bf\u03cd",
@@ -2143,6 +2147,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="conservation_bio",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 related_name="species_conservation_bio_set",
                 blank=True,
                 to="naturebank.SpeciesConservationOption",
@@ -2156,6 +2161,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="conservation_eec",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 related_name="species_conservation_eec_set",
                 blank=True,
                 to="naturebank.SpeciesConservationOption",
@@ -2169,6 +2175,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="conservation_gr",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 related_name="species_conservation_gr_set",
                 blank=True,
                 to="naturebank.SpeciesConservationOption",
@@ -2182,6 +2189,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="conservation_prio",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SpeciesConservationPriorityOption",
                 help_text=b"\xce\xa0\xcf\x81\xce\xbf\xcf\x84\xce\xb5\xcf\x81\xce\xb1\xce\xb9\xcf\x8c\xcf\x84\xce\xb7\xcf\x84\xce\xb1 \xcf\x80\xcf\x81\xce\xbf\xcf\x83\xcf\x84\xce\xb1\xcf\x83\xce\xaf\xce\xb1\xcf\x82",
@@ -2194,6 +2202,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="knowledge",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SpeciesKnowledgeOption",
                 help_text=b"\xce\xa4\xce\xbf \xce\xb5\xcf\x80\xce\xaf\xcf\x80\xce\xb5\xce\xb4\xce\xbf \xce\xb3\xce\xbd\xcf\x8e\xcf\x83\xce\xb7\xcf\x82 \xcf\x83\xcf\x84\xce\xbf \xcf\x83\xcf\x85\xce\xb3\xce\xba\xce\xb5\xce\xba\xcf\x81\xce\xb9\xce\xbc\xce\xad\xce\xbd\xce\xbf \xce\xb5\xce\xaf\xce\xb4\xce\xbf\xcf\x82",
@@ -2206,6 +2215,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="plant_kind",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SpeciesPlantKindOption",
                 help_text=b"\xce\xa5\xcf\x80\xce\xbf\xce\xba\xce\xb1\xcf\x84\xce\xb7\xce\xb3\xce\xbf\xcf\x81\xce\xaf\xce\xb1 \xce\xb3\xce\xb9\xce\xb1 \xcf\x86\xcf\x85\xcf\x84\xcf\x8c (\xce\x91\xce\xbd \xce\xb4\xce\xb5\xce\xbd \xce\xb5\xce\xaf\xce\xbd\xce\xb1\xce\xb9 \xcf\x86\xcf\x85\xcf\x84\xcf\x8c \xcf\x80\xcf\x81\xce\xad\xcf\x80\xce\xb5\xce\xb9 \xce\xbd\xce\xb1 \xce\xb1\xcf\x86\xce\xb5\xce\xb8\xce\xb5\xce\xaf \xce\xba\xce\xb5\xce\xbd\xcf\x8c)",
@@ -2218,6 +2228,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="protection",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SpeciesProtectionOption",
                 help_text=b"\xce\x95\xcf\x80\xce\xaf\xcf\x80\xce\xb5\xce\xb4\xce\xbf \xcf\x80\xcf\x81\xce\xbf\xcf\x83\xcf\x84\xce\xb1\xcf\x83\xce\xaf\xce\xb1\xcf\x82 \xcf\x84\xce\xbf\xcf\x85 \xce\xb5\xce\xaf\xce\xb4\xce\xbf\xcf\x85\xcf\x82",
@@ -2230,6 +2241,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="rarity_bio",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 related_name="species_rarity_bio_set",
                 blank=True,
                 to="naturebank.SpeciesRarityOption",
@@ -2243,6 +2255,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="rarity_eec",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 related_name="species_rarity_eec_set",
                 blank=True,
                 to="naturebank.SpeciesRarityOption",
@@ -2256,6 +2269,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="rarity_gr",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 related_name="species_rarity_gr_set",
                 blank=True,
                 to="naturebank.SpeciesRarityOption",
@@ -2269,6 +2283,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="species_category",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SpeciesCategoryOption",
                 help_text=b"\xce\x9a\xce\xb1\xcf\x84\xce\xb7\xce\xb3\xce\xbf\xcf\x81\xce\xaf\xce\xb1 \xcf\x87\xce\xbb\xcf\x89\xcf\x81\xce\xaf\xce\xb4\xce\xb1\xcf\x82/\xcf\x80\xce\xb1\xce\xbd\xce\xaf\xce\xb4\xce\xb1\xcf\x82 \xcf\x80\xce\xbf\xcf\x85 \xce\xb1\xce\xbd\xce\xae\xce\xba\xce\xb5\xce\xb9 \xcf\x84\xce\xbf \xce\xb5\xce\xaf\xce\xb4\xce\xbf\xcf\x82.",
@@ -2281,6 +2296,7 @@ class Migration(migrations.Migration):
             model_name="species",
             name="trend",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SpeciesTrendOption",
                 help_text=b"\xce\x9f \xcf\x81\xcf\x85\xce\xb8\xce\xbc\xcf\x8c\xcf\x82 \xce\xb1\xce\xbd\xce\xac\xcf\x80\xcf\x84\xcf\x85\xce\xbe\xce\xb7\xcf\x82 \xcf\x84\xce\xbf\xcf\x85 \xce\xb5\xce\xaf\xce\xb4\xce\xbf\xcf\x85\xcf\x82",
@@ -2297,6 +2313,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="category",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.BiotopeCategoryOption",
                 help_text=b"\xce\x9a\xce\xb1\xcf\x84\xce\xb7\xce\xb3\xce\xbf\xcf\x81\xce\xaf\xce\xb1 \xce\xa4\xcf\x8c\xcf\x80\xce\xbf\xcf\x85",
@@ -2321,6 +2338,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="condition",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.ConditionOption",
                 help_text=b"\xce\x9a\xce\xb1\xcf\x84\xce\xac\xcf\x83\xcf\x84\xce\xb1\xcf\x83\xce\xb7 \xcf\x84\xcf\x8c\xcf\x80\xce\xbf\xcf\x85",
@@ -2333,6 +2351,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="conservation",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.ConservationOption",
                 help_text=b"\xce\x95\xcf\x80\xce\xb9\xce\xbb\xce\xbf\xce\xb3\xce\xad\xcf\x82 \xcf\x80\xcf\x81\xce\xbf\xcf\x84\xce\xb5\xcf\x81\xce\xb1\xce\xb9\xcf\x8c\xcf\x84\xce\xb7\xcf\x84\xce\xb1\xcf\x82 \xcf\x80\xcf\x81\xce\xbf\xcf\x83\xcf\x84\xce\xb1\xcf\x83\xce\xaf\xce\xb1\xcf\x82",
@@ -2381,6 +2400,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="geo_code",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.GeoCodeOption",
                 help_text=b"\xce\x93\xce\xb5\xcf\x89\xce\xb3\xcf\x81\xce\xb1\xcf\x86\xce\xb9\xce\xba\xce\xae \xce\x95\xce\xbd\xcf\x8c\xcf\x84\xce\xb7\xcf\x84\xce\xb1",
@@ -2417,6 +2437,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="knowledge",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.KnowledgeOption",
                 help_text=b"\xce\x93\xce\xbd\xcf\x8e\xcf\x83\xce\xb7 \xce\xb3\xce\xb9\xce\xb1 \xcf\x84\xce\xbf \xce\xb2\xce\xb9\xcf\x8c\xcf\x84\xce\xbf\xcf\x80\xce\xbf",
@@ -2441,6 +2462,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="reg_wide",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.WideArea",
                 help_text=b"\xce\x95\xcf\x85\xcf\x81\xcf\x8d\xcf\x84\xce\xb5\xcf\x81\xce\xb7 \xce\xb3\xce\xb5\xcf\x89\xce\xb3\xcf\x81\xce\xb1\xcf\x86\xce\xb9\xce\xba\xce\xae \xcf\x80\xce\xb5\xcf\x81\xce\xb9\xce\xbf\xcf\x87\xce\xae",
@@ -2465,6 +2487,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="social_reaction",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.SocialReactionOption",
                 help_text=b"\xce\x95\xcf\x80\xce\xb9\xce\xbb\xce\xbf\xce\xb3\xce\xad\xcf\x82 \xce\xba\xce\xbf\xce\xb9\xce\xbd\xcf\x89\xce\xbd\xce\xb9\xce\xba\xce\xae\xcf\x82 \xce\xb1\xce\xbd\xcf\x84\xce\xaf\xce\xb4\xcf\x81\xce\xb1\xcf\x83\xce\xb7\xcf\x82",
@@ -2514,6 +2537,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="trend",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.TrendOption",
                 help_text=b"\xce\xa4\xce\xac\xcf\x83\xce\xb7 \xce\xba\xce\xb1\xcf\x84\xce\xac\xcf\x83\xcf\x84\xce\xb1\xcf\x83\xce\xb7\xcf\x82 \xcf\x84\xcf\x8c\xcf\x80\xce\xbf\xcf\x85",
@@ -2526,6 +2550,7 @@ class Migration(migrations.Migration):
             model_name="biotope",
             name="trend_pop",
             field=models.ForeignKey(
+                on_delete=models.CASCADE,
                 blank=True,
                 to="naturebank.TrendPopOption",
                 help_text="\u03a4\u03ac\u03c3\u03b7 \u03c0\u03bb\u03b7\u03b8\u03c5\u03c3\u03bc\u03bf\u03cd",

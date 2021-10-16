@@ -6,7 +6,7 @@ from django.contrib.gis import admin
 admin.autodiscover()
 
 urlpatterns = [
-    url(r"^admin/", include(admin.site.urls)),
+    url(r"^admin/", admin.site.urls),
     url(r"", include("naturebank.urls")),
     url(r"", include("django.contrib.flatpages.urls")),
 ]

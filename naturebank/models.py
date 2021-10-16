@@ -47,6 +47,7 @@ class Biotope(models.Model):
         "BiotopeCategoryOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Κατηγορία Τόπου",
         help_text="Κατηγορία Τόπου",
     )
@@ -126,6 +127,7 @@ class Biotope(models.Model):
         "TrendPopOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Τάση πληθυσμού",
         help_text="Τάση πληθυσμού",
     )
@@ -146,6 +148,7 @@ class Biotope(models.Model):
         "GeoCodeOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Γεωγραφική Ενότητα",
         help_text="Γεωγραφική Ενότητα",
     )
@@ -181,6 +184,7 @@ class Biotope(models.Model):
         "WideArea",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Ευρύτερη Γεωγραφική Περιοχή",
         help_text="Ευρύτερη γεωγραφική περιοχή",
     )
@@ -216,6 +220,7 @@ class Biotope(models.Model):
         "AbandonmentOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Εγκατάλειψη οικισμών",
         help_text="Επίπεδα εγκατάλειψης οικισμών",
     )
@@ -359,6 +364,7 @@ class Biotope(models.Model):
         "ConditionOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Κατάσταση τόπου",
         help_text="Κατάσταση τόπου",
     )
@@ -368,6 +374,7 @@ class Biotope(models.Model):
         "TrendOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Τάση κατάστασης τόπου",
         help_text="Τάση κατάστασης τόπου",
     )
@@ -434,6 +441,7 @@ class Biotope(models.Model):
         "KnowledgeOption",
         blank=True,
         null=True,
+        on_delete=models.SET_NULL,
         verbose_name="Γνώση",
         help_text="Γνώση για το βιότοπο",
     )
@@ -478,6 +486,7 @@ class Biotope(models.Model):
         "SocialReactionOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Κοινωνική αντίδραση",
         help_text="Επιλογές κοινωνικής αντίδρασης",
     )
@@ -498,8 +507,9 @@ class Biotope(models.Model):
     conservation = models.ForeignKey(
         "ConservationOption",
         blank=True,
-        verbose_name="Προτεραιότητα προστασίας",
         null=True,
+        on_delete=models.SET_NULL,
+        verbose_name="Προτεραιότητα προστασίας",
         help_text="Επιλογές προτεραιότητας προστασίας",
     )
 
@@ -610,7 +620,6 @@ class Biotope(models.Model):
     gis_mpoly = models.MultiPolygonField(
         null=True, blank=True, verbose_name="Γεωμετρία πολυγώνων"
     )
-    objects = models.GeoManager()
 
     def total_gis_area_ha(self):
         result = None
@@ -665,7 +674,6 @@ class TempDelete(models.Model):
     gis_sitecode = models.CharField(max_length=9)
 
     gis_mpoly = models.MultiPolygonField()
-    gis_objects = models.GeoManager()
 
     class Meta:
         db_table = "temp_delete"
@@ -676,7 +684,10 @@ class TempDelete(models.Model):
 
 class BiotopeImage(models.Model):
     biotope = models.ForeignKey(
-        Biotope, verbose_name="Τόπος", help_text="Εξωτερική αναφορά σε τόπο"
+        Biotope,
+        verbose_name="Τόπος",
+        help_text="Εξωτερική αναφορά σε τόπο",
+        on_delete=models.CASCADE,
     )
     image = models.ImageField(
         upload_to="SitesPhotos/", verbose_name="Εικόνα", help_text="Αρχείο εικόνας"
@@ -1253,8 +1264,9 @@ class Species(models.Model):
     species_category = models.ForeignKey(
         "SpeciesCategoryOption",
         null=True,
-        verbose_name="Κατηγορία Είδους",
         blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name="Κατηγορία Είδους",
         help_text="Κατηγορία χλωρίδας/πανίδας που ανήκει το είδος.",
     )
     other_names = models.CharField(
@@ -1272,8 +1284,9 @@ class Species(models.Model):
     plant_kind = models.ForeignKey(
         "SpeciesPlantKindOption",
         null=True,
-        verbose_name="Κατηγορία Φυτού",
         blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name="Κατηγορία Φυτού",
         help_text=(
             "Υποκατηγορία για φυτό (Αν δεν είναι φυτό πρέπει" " να αφεθεί κενό)"
         ),
@@ -1282,6 +1295,7 @@ class Species(models.Model):
         "SpeciesKnowledgeOption",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name="Γνώση",
         help_text="Το επίπεδο γνώσης στο συγκεκριμένο είδος",
     )
@@ -1325,8 +1339,9 @@ class Species(models.Model):
     protection = models.ForeignKey(
         "SpeciesProtectionOption",
         null=True,
-        verbose_name="Προστασία",
         blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name="Προστασία",
         help_text="Επίπεδο προστασίας του είδους",
     )
     conservation_prio = models.ForeignKey(
@@ -1334,6 +1349,7 @@ class Species(models.Model):
         verbose_name="Προτεραιότητα Προστασίας",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         help_text="Προτεραιότητα προστασίας",
     )
     trend = models.ForeignKey(
@@ -1341,6 +1357,7 @@ class Species(models.Model):
         null=True,
         verbose_name="Τάση",
         blank=True,
+        on_delete=models.SET_NULL,
         help_text="Ο ρυθμός ανάπτυξης του είδους",
     )
     measures_take = models.TextField(
@@ -1361,6 +1378,7 @@ class Species(models.Model):
         verbose_name="Ελλάδα",
         related_name="species_conservation_gr_set",
         blank=True,
+        on_delete=models.SET_NULL,
         help_text="Κατάσταση διατήρησης του είδους στην Ελλάδα",
     )
     conservation_eec = models.ForeignKey(
@@ -1369,6 +1387,7 @@ class Species(models.Model):
         verbose_name="Ευρωπαϊκή Ένωση",
         related_name="species_conservation_eec_set",
         blank=True,
+        on_delete=models.SET_NULL,
         help_text="Κατάσταση διατήρησης του είδους στην Ευρωπαική Ένωση",
     )
     conservation_bio = models.ForeignKey(
@@ -1377,6 +1396,7 @@ class Species(models.Model):
         verbose_name="Βιόσφαιρα",
         related_name="species_conservation_bio_set",
         blank=True,
+        on_delete=models.SET_NULL,
         help_text="Κατάσταση διατήρησης του είδους στην Βιόσφαιρα",
     )
 
@@ -1387,11 +1407,13 @@ class Species(models.Model):
         verbose_name="Ελλάδα",
         related_name="species_rarity_gr_set",
         blank=True,
+        on_delete=models.SET_NULL,
         help_text="Σπανιότητα του είδους στην Ελλάδα",
     )
     rarity_eec = models.ForeignKey(
         "SpeciesRarityOption",
         null=True,
+        on_delete=models.SET_NULL,
         verbose_name="Ευρωπαϊκή Ένωση",
         related_name="species_rarity_eec_set",
         blank=True,
@@ -1400,6 +1422,7 @@ class Species(models.Model):
     rarity_bio = models.ForeignKey(
         "SpeciesRarityOption",
         null=True,
+        on_delete=models.SET_NULL,
         verbose_name="Βιόσφαιρα",
         related_name="species_rarity_bio_set",
         blank=True,
@@ -1593,9 +1616,14 @@ class SpeciesBiotope(models.Model):
 
     # Core fields
     species = models.ForeignKey(
-        "Species", verbose_name="Είδος", help_text="Είδος Ζώου/Φυτού"
+        "Species",
+        verbose_name="Είδος",
+        help_text="Είδος Ζώου/Φυτού",
+        on_delete=models.CASCADE,
     )
-    biotope = models.ForeignKey("Biotope", verbose_name="Τόπος", help_text="Βιότοπος")
+    biotope = models.ForeignKey(
+        "Biotope", verbose_name="Τόπος", help_text="Βιότοπος", on_delete=models.CASCADE
+    )
     abundance = models.IntegerField(
         null=True,
         blank=True,
@@ -1843,7 +1871,6 @@ class Settlement(models.Model):
     point = models.PointField(null=True, blank=True)
     area = models.FloatField(null=True, blank=True, verbose_name="Επιφάνεια m²")
     perimeter = models.FloatField(null=True, blank=True, verbose_name="Περίμετρος m")
-    objects = models.GeoManager()
 
     class Meta:
         verbose_name = "Οικισμός"
