@@ -7,19 +7,68 @@ from django.utils.encoding import DjangoUnicodeDecodeError
 from django.db import IntegrityError
 
 from naturebank.models import *
-from naturebank_legacy.models import (Species as LegacySpecies, 
-    Biotopes as LegacyBiotope, Biosuppl as LegacyBiosuppl)
-from naturebank_legacy.models import (LutspeciesOrg2, LutspeciesOrganism,
-    LutspeciesKnowledge, LutspeciesProtection, LutspeciesConsPrio,
-    LutspeciesTrend, LutspeciesConse, LutspeciesRaret, CodeWide, OptAbandon,
-    OptCondition,OptTrend, OptKnowledge, OptSocial, CodeConserv, Specor, 
-    OptMainChar, Lengthwidth, Geocodes, Biolocation, Docu, Tbldesignation,
-    Lutdesignation, Desig, Own, Geology, Charr, History, OptOwn, OwnType,
-    Lutsitetype, Tblsitetype, Lutclimate, Tblclimate, Qual, Lutculturalvalue,
-    Tblculturalvalue, Lutecologicalvalue, Tblecologicalvalue, Lutsocialvalue,
-    Tblsocialvalue, Vuln, Lutthreat, Tblthreat, Tourism, Infra, Viewing, Paths,
-    Human, OptTrendPop, Luthumanactivity, Tblhumanactivity, Tblspeciescomment,
-    Luthabitation, Tblhabitation)
+from naturebank_legacy.models import (
+    Species as LegacySpecies,
+    Biotopes as LegacyBiotope,
+    Biosuppl as LegacyBiosuppl,
+)
+from naturebank_legacy.models import (
+    LutspeciesOrg2,
+    LutspeciesOrganism,
+    LutspeciesKnowledge,
+    LutspeciesProtection,
+    LutspeciesConsPrio,
+    LutspeciesTrend,
+    LutspeciesConse,
+    LutspeciesRaret,
+    CodeWide,
+    OptAbandon,
+    OptCondition,
+    OptTrend,
+    OptKnowledge,
+    OptSocial,
+    CodeConserv,
+    Specor,
+    OptMainChar,
+    Lengthwidth,
+    Geocodes,
+    Biolocation,
+    Docu,
+    Tbldesignation,
+    Lutdesignation,
+    Desig,
+    Own,
+    Geology,
+    Charr,
+    History,
+    OptOwn,
+    OwnType,
+    Lutsitetype,
+    Tblsitetype,
+    Lutclimate,
+    Tblclimate,
+    Qual,
+    Lutculturalvalue,
+    Tblculturalvalue,
+    Lutecologicalvalue,
+    Tblecologicalvalue,
+    Lutsocialvalue,
+    Tblsocialvalue,
+    Vuln,
+    Lutthreat,
+    Tblthreat,
+    Tourism,
+    Infra,
+    Viewing,
+    Paths,
+    Human,
+    OptTrendPop,
+    Luthumanactivity,
+    Tblhumanactivity,
+    Tblspeciescomment,
+    Luthabitation,
+    Tblhabitation,
+)
 
 
 class Command(BaseCommand):
@@ -31,126 +80,115 @@ class Command(BaseCommand):
         SpeciesCategoryOption.objects.all().delete()
         lut = LutspeciesOrg2.objects.all()
         for entry in lut:
-            draft = SpeciesCategoryOption(
-                        abbreviation=entry.org2,
-                        name=entry.descorg2)
+            draft = SpeciesCategoryOption(abbreviation=entry.org2, name=entry.descorg2)
             draft.save()
-        
+
         SpeciesPlantKindOption.objects.all().delete()
         lut = LutspeciesOrganism.objects.all()
         for entry in lut:
             draft = SpeciesPlantKindOption(
-                        abbreviation=entry.organism,
-                        name=entry.descorganism)
+                abbreviation=entry.organism, name=entry.descorganism
+            )
             draft.save()
-        
+
         SpeciesKnowledgeOption.objects.all().delete()
         lut = LutspeciesKnowledge.objects.all()
         for entry in lut:
             draft = SpeciesKnowledgeOption(
-                        abbreviation=entry.knowledge,
-                        name=entry.descknowledge)
+                abbreviation=entry.knowledge, name=entry.descknowledge
+            )
             draft.save()
-        
+
         SpeciesProtectionOption.objects.all().delete()
         lut = LutspeciesProtection.objects.all()
         for entry in lut:
             draft = SpeciesProtectionOption(
-                        abbreviation=entry.protection,
-                        name=entry.descprotection)
+                abbreviation=entry.protection, name=entry.descprotection
+            )
             draft.save()
-        
+
         SpeciesConservationPriorityOption.objects.all().delete()
         lut = LutspeciesConsPrio.objects.all()
         for entry in lut:
             draft = SpeciesConservationPriorityOption(
-                        abbreviation=entry.cons_prio,
-                        name=entry.descconservationpriority)
+                abbreviation=entry.cons_prio, name=entry.descconservationpriority
+            )
             draft.save()
-        
+
         SpeciesTrendOption.objects.all().delete()
         lut = LutspeciesTrend.objects.all()
         for entry in lut:
-            draft = SpeciesTrendOption(
-                        abbreviation=entry.trend,
-                        name=entry.desctrend)
+            draft = SpeciesTrendOption(abbreviation=entry.trend, name=entry.desctrend)
             draft.save()
-        
+
         SpeciesConservationOption.objects.all().delete()
         lut = LutspeciesConse.objects.all()
         for entry in lut:
             draft = SpeciesConservationOption(
-                        abbreviation=entry.conse,
-                        name=entry.descconservation)
+                abbreviation=entry.conse, name=entry.descconservation
+            )
             draft.save()
-        
+
         SpeciesRarityOption.objects.all().delete()
         lut = LutspeciesRaret.objects.all()
         for entry in lut:
-            draft = SpeciesRarityOption(
-                        abbreviation=entry.raret,
-                        name=entry.descrarety)
+            draft = SpeciesRarityOption(abbreviation=entry.raret, name=entry.descrarety)
             draft.save()
-        
-        
+
         # Fill the naturebank.Species table
         Species.objects.all().delete()
         legacy = LegacySpecies.objects.all()
         for entry in legacy:
             draft = Species(
-                        creation_date=entry.date1,
-                        update_date=entry.update1,
-                        
-                        # Maybe we switch to Float again (cause it is a double in C)
-                        species_code=int(entry.speci_code),
-                        species_name=entry.speci_name,
-                        sub_species=entry.sub_speci,
-                        other_names=entry.oth_names,
-                        species_name_gr=entry.name_gr,
-                        habitat=entry.habitat,
-                        expansion=entry.expans,
-                        origin=entry.origin,
-                        respondent=entry.respondent,
-                        
-                        category_ende=int(entry.categ_ende),
-                        category_migr=int(entry.categ_migr),
-                        category_bree=int(entry.categ_bree),
-                        category_resi=int(entry.categ_resi),
-                        category_intr=int(entry.categ_intr),
-                        category=entry.category,
-                        
-                        measures_take=entry.meas_take,
-                        measures_need=entry.meas_need,
-                        
-                        threat_hunt=int(entry.threa_hunt),
-                        threat_fish=int(entry.threa_fish),
-                        threat_coll=int(entry.threa_coll),
-                        threat_fore=int(entry.threa_fore),
-                        threat_graz=int(entry.threa_graz),
-                        threat_poll=int(entry.threa_poll),
-                        threat_cult=int(entry.threa_cult),
-                        threat_tour=int(entry.threa_tour),
-                        threat_road=int(entry.threa_road),
-                        threat_buil=int(entry.threa_buil),
-                        threat_drai=int(entry.threa_drai),
-                        threat_eutr=int(entry.threa_eutr),
-                        threat_pest=int(entry.threa_pest),
-                        threat_other=int(entry.threa_othe),
-                        
-                        exploit_hunt=int(entry.expl_hunt),
-                        exploit_fish=int(entry.expl_fish),
-                        exploit_coll=int(entry.expl_coll),
-                        exploit_logg=int(entry.expl_logg),
-                        exploit_graz=int(entry.expl_graz),
-                        
-                        threat=entry.threat)
-                        
+                creation_date=entry.date1,
+                update_date=entry.update1,
+                # Maybe we switch to Float again (cause it is a double in C)
+                species_code=int(entry.speci_code),
+                species_name=entry.speci_name,
+                sub_species=entry.sub_speci,
+                other_names=entry.oth_names,
+                species_name_gr=entry.name_gr,
+                habitat=entry.habitat,
+                expansion=entry.expans,
+                origin=entry.origin,
+                respondent=entry.respondent,
+                category_ende=int(entry.categ_ende),
+                category_migr=int(entry.categ_migr),
+                category_bree=int(entry.categ_bree),
+                category_resi=int(entry.categ_resi),
+                category_intr=int(entry.categ_intr),
+                category=entry.category,
+                measures_take=entry.meas_take,
+                measures_need=entry.meas_need,
+                threat_hunt=int(entry.threa_hunt),
+                threat_fish=int(entry.threa_fish),
+                threat_coll=int(entry.threa_coll),
+                threat_fore=int(entry.threa_fore),
+                threat_graz=int(entry.threa_graz),
+                threat_poll=int(entry.threa_poll),
+                threat_cult=int(entry.threa_cult),
+                threat_tour=int(entry.threa_tour),
+                threat_road=int(entry.threa_road),
+                threat_buil=int(entry.threa_buil),
+                threat_drai=int(entry.threa_drai),
+                threat_eutr=int(entry.threa_eutr),
+                threat_pest=int(entry.threa_pest),
+                threat_other=int(entry.threa_othe),
+                exploit_hunt=int(entry.expl_hunt),
+                exploit_fish=int(entry.expl_fish),
+                exploit_coll=int(entry.expl_coll),
+                exploit_logg=int(entry.expl_logg),
+                exploit_graz=int(entry.expl_graz),
+                threat=entry.threat,
+            )
+
             # Foreign Keys Handling
             try:
                 val = entry.org2
                 if val:
                     draft.species_category = SpeciesCategoryOption.objects.get(
-                                                abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesCategoryOption.DoesNotExist:
                 print("SpeciesCategoryOption entry does not exist")
 
@@ -158,103 +196,94 @@ class Command(BaseCommand):
                 val = entry.organism
                 if val:
                     draft.plant_kind = SpeciesPlantKindOption.objects.get(
-                                    abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesPlantKindOption.DoesNotExist:
                 print("SpeciesPlantKindOption entry does not exist")
 
-            
             try:
                 val = entry.knowledge
                 if val:
                     draft.knowledge = SpeciesKnowledgeOption.objects.get(
-                                    abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesKnowledgeOption.DoesNotExist:
                 print("SpeciesKnowledgeOption entry does not exist")
 
-            
             try:
                 val = entry.protection
                 if val:
                     draft.protection = SpeciesProtectionOption.objects.get(
-                                    abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesProtectionOption.DoesNotExist:
                 print("SpeciesProtectionOption entry does not exist")
 
-
-            
             try:
                 val = entry.cons_prio
                 if val:
-                    draft.conservation_prio = SpeciesConservationPriorityOption.objects.get(
-                                    abbreviation=val)
+                    draft.conservation_prio = (
+                        SpeciesConservationPriorityOption.objects.get(abbreviation=val)
+                    )
             except SpeciesConservationPriorityOption.DoesNotExist:
                 print("SpeciesConservationPriorityOption entry does not exist")
 
-            
             try:
                 val = entry.trend
                 if val:
-                    draft.trend = SpeciesTrendOption.objects.get(
-                                    abbreviation=val)
+                    draft.trend = SpeciesTrendOption.objects.get(abbreviation=val)
             except SpeciesTrendOption.DoesNotExist:
                 print("SpeciesTrendOption entry does not exist")
 
-            
             try:
                 val = entry.conse_gr
                 if val:
                     draft.conservation_gr = SpeciesConservationOption.objects.get(
-                                    abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesConservationOption.DoesNotExist:
                 print("SpeciesConservationOption entry does not exist")
 
-            
             try:
                 val = entry.conse_eec
                 if val:
                     draft.conservation_eec = SpeciesConservationOption.objects.get(
-                                    abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesConservationOption.DoesNotExist:
                 print("SpeciesConservationOption entry does not exist")
 
-            
             try:
                 val = entry.conse_bio
                 if val:
                     draft.conservation_bio = SpeciesConservationOption.objects.get(
-                                    abbreviation=val)
+                        abbreviation=val
+                    )
             except SpeciesConservationOption.DoesNotExist:
                 print("SpeciesConservationOption entry does not exist")
 
-            
             try:
                 val = entry.raret_gr
                 if val:
-                    draft.rarity_gr = SpeciesRarityOption.objects.get(
-                                    abbreviation=val)
+                    draft.rarity_gr = SpeciesRarityOption.objects.get(abbreviation=val)
             except SpeciesRarityOption.DoesNotExist:
                 print("SpeciesRarityOption entry does not exist")
 
-            
             try:
                 val = entry.raret_eec
                 if val:
-                    draft.rarity_eec = SpeciesRarityOption.objects.get(
-                                    abbreviation=val)
+                    draft.rarity_eec = SpeciesRarityOption.objects.get(abbreviation=val)
             except SpeciesRarityOption.DoesNotExist:
                 print("SpeciesRarityOption entry does not exist")
 
-            
             try:
                 val = entry.raret_bio
                 if val:
-                    draft.rarity_bio = SpeciesRarityOption.objects.get(
-                                    abbreviation=val)
+                    draft.rarity_bio = SpeciesRarityOption.objects.get(abbreviation=val)
             except SpeciesRarityOption.DoesNotExist:
                 print("SpeciesRarityOption entry does not exist")
 
             draft.save()
-
 
         ### ### ### ### BIOTOPE PART ### ### ### ###
 
@@ -264,105 +293,97 @@ class Command(BaseCommand):
         lut = Luthabitation.objects.all()
         for entry in lut:
             draft = HabitationOption(
-                        abbreviation=entry.codehabitation,
-                        name=entry.deschabitation)
+                abbreviation=entry.codehabitation, name=entry.deschabitation
+            )
             draft.save()
 
         TrendPopOption.objects.all().delete()
         lut = OptTrendPop.objects.all()
         for entry in lut:
-            draft = TrendPopOption(
-                        id=int(entry.tag),
-                        name=entry.meaning)
+            draft = TrendPopOption(id=int(entry.tag), name=entry.meaning)
             draft.save()
 
         HumanActivityOption.objects.all().delete()
         lut = Luthumanactivity.objects.all()
         for entry in lut:
             draft = HumanActivityOption(
-                        abbreviation=entry.codehumanactivity,
-                        name=entry.deschumanactivity)
+                abbreviation=entry.codehumanactivity, name=entry.deschumanactivity
+            )
             draft.save()
 
         ThreatOption.objects.all().delete()
         lut = Lutthreat.objects.all()
         for entry in lut:
-            draft = ThreatOption(
-                        abbreviation=entry.codethreat,
-                        name=entry.descthreat)
+            draft = ThreatOption(abbreviation=entry.codethreat, name=entry.descthreat)
             draft.save()
 
         CulturalValueOption.objects.all().delete()
         lut = Lutculturalvalue.objects.all()
         for entry in lut:
             draft = CulturalValueOption(
-                        abbreviation=entry.codeculturalvalue,
-                        name=entry.descculturalvalue)
+                abbreviation=entry.codeculturalvalue, name=entry.descculturalvalue
+            )
             draft.save()
 
         SocialValueOption.objects.all().delete()
         lut = Lutsocialvalue.objects.all()
         for entry in lut:
             draft = SocialValueOption(
-                        abbreviation=entry.codesocialvalue,
-                        name=entry.descsocialvalue)
+                abbreviation=entry.codesocialvalue, name=entry.descsocialvalue
+            )
             draft.save()
 
         EcologicalValueOption.objects.all().delete()
         lut = Lutecologicalvalue.objects.all()
         for entry in lut:
             draft = EcologicalValueOption(
-                        abbreviation=entry.codeecologicalvalue,
-                        name=entry.descecologicalvalue)
+                abbreviation=entry.codeecologicalvalue, name=entry.descecologicalvalue
+            )
             draft.save()
 
         ClimateOption.objects.all().delete()
         lut = Lutclimate.objects.all()
         for entry in lut:
             draft = ClimateOption(
-                        abbreviation=entry.codeclimate,
-                        name=entry.descclimate)
+                abbreviation=entry.codeclimate, name=entry.descclimate
+            )
             draft.save()
 
         SiteTypeOption.objects.all().delete()
         lut = Lutsitetype.objects.all()
         for entry in lut:
             draft = SiteTypeOption(
-                        abbreviation=entry.codesitetype,
-                        name=entry.descsitetype)
+                abbreviation=entry.codesitetype, name=entry.descsitetype
+            )
             draft.save()
 
         OwnerOption.objects.all().delete()
         lut = OptOwn.objects.all()
         for entry in lut:
-            draft = OwnerOption(
-                        id=entry.tag,
-                        name=entry.meaning)
+            draft = OwnerOption(id=entry.tag, name=entry.meaning)
             draft.save()
 
         DesignationOption.objects.all().delete()
         lut = Lutdesignation.objects.all()
         for entry in lut:
             draft = DesignationOption(
-                        abbreviation=entry.codedesignation,
-                        name=entry.descdesignation)
+                abbreviation=entry.codedesignation, name=entry.descdesignation
+            )
             draft.save()
 
         AbandonmentOption.objects.all().delete()
         lut = OptAbandon.objects.all()
         for entry in lut:
-            draft = AbandonmentOption(
-                        id=entry.tag,
-                        name=entry.meaning)
+            draft = AbandonmentOption(id=entry.tag, name=entry.meaning)
             draft.save()
 
         WideArea.objects.all().delete()
         lut = CodeWide.objects.all()
         for entry in lut:
-            if not entry.wide_code=='':
+            if not entry.wide_code == "":
                 draft = WideArea(
-                            id = int(entry.wide_code),
-                            wide_area_name=entry.wide_name)
+                    id=int(entry.wide_code), wide_area_name=entry.wide_name
+                )
                 draft.save()
 
         GeoCodeOption.objects.all().delete()
@@ -370,52 +391,45 @@ class Command(BaseCommand):
         for entry in lut:
             # We want to map each level code to one place of the CommaSepField
             draft = GeoCodeOption(
-                        code = str(entry.level1)+","+
-                               str(entry.level2)+","+
-                               str(entry.level3),
-                        name=entry.region_name,
-                        name_eng=entry.region_eng)
+                code=str(entry.level1)
+                + ","
+                + str(entry.level2)
+                + ","
+                + str(entry.level3),
+                name=entry.region_name,
+                name_eng=entry.region_eng,
+            )
             draft.save()
 
         # Fill the secondary tables of BiotopeSuppl
         ConditionOption.objects.all().delete()
         lut = OptCondition.objects.all()
         for entry in lut:
-            draft = ConditionOption(
-                        id = entry.tag,
-                        name=entry.meaning)
+            draft = ConditionOption(id=entry.tag, name=entry.meaning)
             draft.save()
 
         TrendOption.objects.all().delete()
         lut = OptTrend.objects.all()
         for entry in lut:
-            draft = TrendOption(
-                        id = entry.tag,
-                        name=entry.meaning)
+            draft = TrendOption(id=entry.tag, name=entry.meaning)
             draft.save()
 
         KnowledgeOption.objects.all().delete()
         lut = OptKnowledge.objects.all()
         for entry in lut:
-            draft = KnowledgeOption(
-                        id = entry.tag,
-                        name=entry.meaning)
+            draft = KnowledgeOption(id=entry.tag, name=entry.meaning)
             draft.save()
 
         SocialReactionOption.objects.all().delete()
         lut = OptSocial.objects.all()
         for entry in lut:
-            draft = SocialReactionOption(
-                        id = entry.tag,
-                        name=entry.meaning)
+            draft = SocialReactionOption(id=entry.tag, name=entry.meaning)
             draft.save()
 
         ConservationOption.objects.all().delete()
         lut = CodeConserv.objects.all()
         for entry in lut:
-            draft = ConservationOption(
-                        id = entry.code_conserv,
-                        name=entry.conservation)
+            draft = ConservationOption(id=entry.code_conserv, name=entry.conservation)
             draft.save()
 
         # Fill the naturebank.Biotope table
@@ -423,71 +437,61 @@ class Command(BaseCommand):
         legacy = LegacyBiotope.objects.all()
         for entry in legacy:
             draft = Biotope(
-                site_code = entry.sitecode,
-                site_name = entry.site_name,
-                site_name_gr = entry.site_name_gr,
-                
+                site_code=entry.sitecode,
+                site_name=entry.site_name,
+                site_name_gr=entry.site_name_gr,
                 # Migration of Char to Boolean !!!
-                main_char_biotopos = int(entry.main_char_biotope),
-                main_char_natural = int(entry.main_char_natural),
-                main_char_built = int(entry.main_char_built),
-
-                reg_code_1 = entry.reg_code_1,
-                reg_code_2 = entry.reg_code_2,
-                reg_code_3 = entry.reg_code_3,
-                reg_code_4 = entry.reg_code_4,
-                
-                creation_date = entry.date1,
-                update_date = entry.update1,
-                date_old = entry.date_old,
-                update_old = entry.update_old,
-
-                comp_code = entry.comp_code,
-                comp_name = entry.comp_name,
-
-                dist_name = entry.dist_name,
-                reg_mun = entry.reg_mun,
-
-                area = entry.area,
-                area_l = entry.area_l,
-                area_s = entry.area_s,
-
-                long_deg = entry.long_deg,
-                long_min = entry.long_min,
-                long_sec = entry.long_sec,
-                lat_deg = entry.lat_deg,
-                lat_min = entry.lat_min,
-                lat_sec = entry.lat_sec,
-
-                alt_mean = entry.alt_mean,
-                alt_max = entry.alt_max,
-                alt_min = entry.alt_min,
-
-                respondent = entry.respondent)
+                main_char_biotopos=int(entry.main_char_biotope),
+                main_char_natural=int(entry.main_char_natural),
+                main_char_built=int(entry.main_char_built),
+                reg_code_1=entry.reg_code_1,
+                reg_code_2=entry.reg_code_2,
+                reg_code_3=entry.reg_code_3,
+                reg_code_4=entry.reg_code_4,
+                creation_date=entry.date1,
+                update_date=entry.update1,
+                date_old=entry.date_old,
+                update_old=entry.update_old,
+                comp_code=entry.comp_code,
+                comp_name=entry.comp_name,
+                dist_name=entry.dist_name,
+                reg_mun=entry.reg_mun,
+                area=entry.area,
+                area_l=entry.area_l,
+                area_s=entry.area_s,
+                long_deg=entry.long_deg,
+                long_min=entry.long_min,
+                long_sec=entry.long_sec,
+                lat_deg=entry.lat_deg,
+                lat_min=entry.lat_min,
+                lat_sec=entry.lat_sec,
+                alt_mean=entry.alt_mean,
+                alt_max=entry.alt_max,
+                alt_min=entry.alt_min,
+                respondent=entry.respondent,
+            )
 
             # Foreign Keys Handling
             try:
-                if not entry.reg_wide.wide_code=='':
+                if not entry.reg_wide.wide_code == "":
                     val = int(entry.reg_wide.wide_code)
                     if val:
-                        draft.reg_wide = WideArea.objects.get(
-                                                    pk=val)
+                        draft.reg_wide = WideArea.objects.get(pk=val)
             except WideArea.DoesNotExist:
                 print("WideArea entry does not exist")
             except CodeWide.DoesNotExist:
                 print("CodeWide entry does not exist")
-            
+
             try:
                 val = entry.abandon
                 if val:
-                    draft.abandon = AbandonmentOption.objects.get(
-                                                pk=val.tag)
+                    draft.abandon = AbandonmentOption.objects.get(pk=val.tag)
             except AbandonmentOption.DoesNotExist:
                 print("AbandonmentOption entry does not exist")
             except OptAbandon.DoesNotExist:
                 print("OptAbandon entry does not exist")
             # TODO: Migrate Species relation through intermediate table.
-                
+
             draft.save()
 
         # Update of Biotope entries with extra data (Merging of legacy tables)
@@ -511,7 +515,6 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
 
-
         lut = Lengthwidth.objects.all()
         for entry in lut:
             try:
@@ -527,9 +530,13 @@ class Command(BaseCommand):
         lut = Biolocation.objects.all()
         for entry in lut:
             try:
-                g = GeoCodeOption.objects.get(pk=str(entry.geo_level_1)+","+
-                                                 str(entry.geo_level_2)+","+
-                                                 str(entry.geo_level_3))
+                g = GeoCodeOption.objects.get(
+                    pk=str(entry.geo_level_1)
+                    + ","
+                    + str(entry.geo_level_2)
+                    + ","
+                    + str(entry.geo_level_3)
+                )
                 draft = Biotope.objects.get(site_code=entry.sitecode)
                 draft.geo_code = g
                 draft.save()
@@ -549,7 +556,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Desig.objects.all()
         for entry in lut:
@@ -562,7 +569,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Own.objects.all()
         for entry in lut:
@@ -575,7 +582,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Geology.objects.all()
         for entry in lut:
@@ -588,7 +595,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Charr.objects.all()
         for entry in lut:
@@ -601,7 +608,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = History.objects.all()
         for entry in lut:
@@ -614,7 +621,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Qual.objects.all()
         for entry in lut:
@@ -627,7 +634,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Vuln.objects.all()
         for entry in lut:
@@ -640,7 +647,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Tourism.objects.all()
         for entry in lut:
@@ -653,7 +660,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Infra.objects.all()
         for entry in lut:
@@ -666,7 +673,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Viewing.objects.all()
         for entry in lut:
@@ -679,7 +686,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Paths.objects.all()
         for entry in lut:
@@ -692,7 +699,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         lut = Tblspeciescomment.objects.all()
         for entry in lut:
@@ -705,7 +712,7 @@ class Command(BaseCommand):
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
             except LegacyBiotope.DoesNotExist:
-                print ("Biotopes legacy entry does not exist")
+                print("Biotopes legacy entry does not exist")
 
         qset = Biotope.objects.filter(site_code__contains="AT")
         bco = BiotopeCategoryOption.objects.get_or_create(name="ΤΙΦΚ")[0]
@@ -739,30 +746,30 @@ class Command(BaseCommand):
             try:
                 draft = Biotope.objects.get(site_code=entry.sitecode.sitecode)
                 draft.trend_text = entry.trend_text
-                draft.threat_hunt = (entry.threa_hunt!='' and int(entry.threa_hunt))
-                draft.threat_fish = (entry.threa_fish!='' and int(entry.threa_fish))
-                draft.threat_coll = (entry.threa_coll!='' and int(entry.threa_coll))
-                draft.threat_graz = (entry.threa_graz!='' and int(entry.threa_graz))
-                draft.threat_poll = (entry.threa_poll!='' and int(entry.threa_poll))
-                draft.threat_cult = (entry.threa_cult!='' and int(entry.threa_cult))
-                draft.threat_road = (entry.threa_road!='' and int(entry.threa_road))
-                draft.threat_buil = (entry.threa_buil!='' and int(entry.threa_buil))
-                draft.threat_drai = (entry.threa_drai!='' and int(entry.threa_drai))
-                draft.threat_eutr = (entry.threa_eutr!='' and int(entry.threa_eutr))
-                draft.threat_pest = (entry.threa_pest!='' and int(entry.threa_pest))
-                draft.threat_tour = (entry.threa_tour!='' and int(entry.threa_tour))
-                draft.threat_fore = (entry.threa_fore!='' and int(entry.threa_fore))
-                draft.threat_mini = (entry.threa_mini!='' and int(entry.threa_mini))
-                draft.threat_other = (entry.threa_othe!='' and int(entry.threa_othe))
+                draft.threat_hunt = entry.threa_hunt != "" and int(entry.threa_hunt)
+                draft.threat_fish = entry.threa_fish != "" and int(entry.threa_fish)
+                draft.threat_coll = entry.threa_coll != "" and int(entry.threa_coll)
+                draft.threat_graz = entry.threa_graz != "" and int(entry.threa_graz)
+                draft.threat_poll = entry.threa_poll != "" and int(entry.threa_poll)
+                draft.threat_cult = entry.threa_cult != "" and int(entry.threa_cult)
+                draft.threat_road = entry.threa_road != "" and int(entry.threa_road)
+                draft.threat_buil = entry.threa_buil != "" and int(entry.threa_buil)
+                draft.threat_drai = entry.threa_drai != "" and int(entry.threa_drai)
+                draft.threat_eutr = entry.threa_eutr != "" and int(entry.threa_eutr)
+                draft.threat_pest = entry.threa_pest != "" and int(entry.threa_pest)
+                draft.threat_tour = entry.threa_tour != "" and int(entry.threa_tour)
+                draft.threat_fore = entry.threa_fore != "" and int(entry.threa_fore)
+                draft.threat_mini = entry.threa_mini != "" and int(entry.threa_mini)
+                draft.threat_other = entry.threa_othe != "" and int(entry.threa_othe)
                 draft.threat_text = entry.threa_text
 
                 draft.measures_take = entry.meas_take
                 draft.measures_need = entry.meas_need
 
-                draft.fire_50 = (entry.fire_50!='' and int(entry.fire_50))
-                draft.fire_3050 = (entry.fire_3050!='' and int(entry.fire_3050))
-                draft.fire_1030 = (entry.fire_1030!='' and int(entry.fire_1030))
-                draft.fire_10 = (entry.fire_10!='' and int(entry.fire_10))
+                draft.fire_50 = entry.fire_50 != "" and int(entry.fire_50)
+                draft.fire_3050 = entry.fire_3050 != "" and int(entry.fire_3050)
+                draft.fire_1030 = entry.fire_1030 != "" and int(entry.fire_1030)
+                draft.fire_10 = entry.fire_10 != "" and int(entry.fire_10)
                 draft.fire_text = entry.fire_text
 
                 draft.restore = entry.restore
@@ -770,36 +777,33 @@ class Command(BaseCommand):
                 draft.intro_text = entry.intro_text
                 draft.social_reaction_text = entry.socia_text
                 draft.develop = entry.develop
-                
+
                 # Foreign Keys Handling
                 # Condition
                 try:
                     val = entry.condition1
                     if val:
-                        draft.condition = ConditionOption.objects.get(
-                                                    pk=val.tag)
+                        draft.condition = ConditionOption.objects.get(pk=val.tag)
                 except ConditionOption.DoesNotExist:
                     print("ConditionOption entry does not exist")
                 except OptCondition.DoesNotExist:
                     print("OptCondition entry does not exist")
 
-                # Trend 
+                # Trend
                 try:
                     val = entry.trend
                     if val:
-                        draft.trend = TrendOption.objects.get(
-                                                    pk=val.tag)
+                        draft.trend = TrendOption.objects.get(pk=val.tag)
                 except TrendOption.DoesNotExist:
                     print("TrendOption entry does not exist")
                 except OptTrend.DoesNotExist:
                     print("OptTrend entry does not exist")
 
-                # Knowledge 
+                # Knowledge
                 try:
                     val = entry.knowledge
                     if val:
-                        draft.knowledge = KnowledgeOption.objects.get(
-                                                    pk=val.tag)
+                        draft.knowledge = KnowledgeOption.objects.get(pk=val.tag)
                 except KnowledgeOption.DoesNotExist:
                     print("KnowledgeOption entry does not exist")
                 except OptKnowledge.DoesNotExist:
@@ -810,19 +814,20 @@ class Command(BaseCommand):
                     val = entry.social
                     if val:
                         draft.social_reaction = SocialReactionOption.objects.get(
-                                                    pk=val.tag)
+                            pk=val.tag
+                        )
                 except SocialReactionOption.DoesNotExist:
                     print("SocialReactionOption entry does not exist")
                 except OptSocial.DoesNotExist:
                     print("OptSocial entry does not exist")
 
-
-                # Conservation 
+                # Conservation
                 try:
                     val = entry.conserv
                     if val:
                         draft.conservation = ConservationOption.objects.get(
-                                                    pk=val.code_conserv)
+                            pk=val.code_conserv
+                        )
                 except ConservationOption.DoesNotExist:
                     print("ConservationOption entry does not exist")
                 except CodeConserv.DoesNotExist:
@@ -896,7 +901,9 @@ class Command(BaseCommand):
         for entry in m2m:
             try:
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
-                d = HumanActivityOption.objects.get(abbreviation=entry.codehumanactivity)
+                d = HumanActivityOption.objects.get(
+                    abbreviation=entry.codehumanactivity
+                )
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
                 continue
@@ -924,7 +931,9 @@ class Command(BaseCommand):
         for entry in m2m:
             try:
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
-                d = CulturalValueOption.objects.get(abbreviation=entry.codeculturalvalue)
+                d = CulturalValueOption.objects.get(
+                    abbreviation=entry.codeculturalvalue
+                )
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
                 continue
@@ -952,7 +961,9 @@ class Command(BaseCommand):
         for entry in m2m:
             try:
                 b = Biotope.objects.get(site_code=entry.sitecode.sitecode)
-                d = EcologicalValueOption.objects.get(abbreviation=entry.codeecologicalvalue)
+                d = EcologicalValueOption.objects.get(
+                    abbreviation=entry.codeecologicalvalue
+                )
             except Biotope.DoesNotExist:
                 print("Biotope entry does not exist")
                 continue
@@ -1022,16 +1033,13 @@ class Command(BaseCommand):
                     ab = int(entry.abund)
                 except ValueError:
                     ab = 0
-                draft = SpeciesBiotope(
-                            species=sp,
-                            biotope=b,
-                            abundance=ab)
+                draft = SpeciesBiotope(species=sp, biotope=b, abundance=ab)
                 draft.save()
             except IntegrityError:
                 pass
 
         # Photos Handling
-        for filename in os.listdir("%s/SitesPhotos" % settings.MEDIA_ROOT ):
+        for filename in os.listdir("%s/SitesPhotos" % settings.MEDIA_ROOT):
             print(filename[:-4])
             try:
                 b = Biotope.objects.get(site_code=filename[:-4])

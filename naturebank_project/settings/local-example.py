@@ -4,16 +4,16 @@ from .base import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-SECRET_KEY = 'dummy'
-MEDIA_URL = '/site_media/'
-MEDIA_ROOT = 'site_media'
+SECRET_KEY = "dummy"
+MEDIA_URL = "/site_media/"
+MEDIA_ROOT = "site_media"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'naturebank',
-        'USER': 'filotis',
-        'PASSWORD': 'topsecret',
-        'HOST': 'localhost',
+    "default": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": "naturebank",
+        "USER": "filotis",
+        "PASSWORD": "topsecret",
+        "HOST": "localhost",
     }
 }
