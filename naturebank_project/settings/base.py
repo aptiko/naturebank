@@ -48,3 +48,5 @@ INSTALLED_APPS = (
 STATIC_URL = "/static/"
 
 FIXTURE_DIRS = ("/fixtures/",)
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

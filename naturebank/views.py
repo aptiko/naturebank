@@ -3,7 +3,7 @@ from django.contrib.gis.geos import Polygon
 from django.contrib.gis.shortcuts import render_to_kml
 from django.db.models import Q
 from django.http import Http404, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -35,29 +35,23 @@ filter_keys = (
 
 
 def frontpage(request):
-    return render_to_response(
-        "frontpage.html", {}, context_instance=RequestContext(request)
-    )
+    return render(request, "frontpage.html", {}, context=RequestContext(request))
 
 
 def info(request):
-    return render_to_response("info.html", {}, context_instance=RequestContext(request))
+    return render(request, "info.html", {}, context=RequestContext(request))
 
 
 def info_usage(request):
-    return render_to_response(
-        "info_usage.html", {}, context_instance=RequestContext(request)
-    )
+    return render(request, "info_usage.html", {}, context=RequestContext(request))
 
 
 def poweredby(request):
-    return render_to_response(
-        "poweredby.html", {}, context_instance=RequestContext(request)
-    )
+    return render(request, "poweredby.html", {}, context=RequestContext(request))
 
 
 def tos(request):
-    return render_to_response("tos.html", {}, context_instance=RequestContext(request))
+    return render(request, "tos.html", {}, context=RequestContext(request))
 
 
 class BiotopeListView(ListView):
@@ -232,9 +226,7 @@ class SpeciesDetailView(DetailView):
 def index(request):
     """The view which returns the index page of the project"""
 
-    return render_to_response(
-        "index.html", {}, context_instance=RequestContext(request)
-    )
+    return render(request, "index.html", {}, context=RequestContext(request))
 
 
 layers = {
