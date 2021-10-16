@@ -1,5 +1,6 @@
-from naturebank import models
 from django.contrib.gis import admin
+
+from naturebank import models
 
 
 class SpeciesBiotopeInline(admin.TabularInline):

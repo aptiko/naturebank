@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from string import ascii_letters
-import django_filters
-from .models import Biotope, Species, GeoCodeOption, BiotopeCategoryOption
 
+import django_filters
+
+from .models import Biotope, BiotopeCategoryOption, GeoCodeOption, Species
 
 ASCII_LETTERS = ascii_letters[26:]
 

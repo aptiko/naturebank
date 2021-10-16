@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # UTF8 Encoded
-from django.core.management.base import BaseCommand
-from django.conf import settings
 import os
+
+from django.conf import settings
+from django.core.management.base import BaseCommand
 from django.utils.encoding import DjangoUnicodeDecodeError
-from naturebank.models import GeoCodeOption, BiotopeCategoryOption, CategoryGeoMap
+
+from naturebank.models import BiotopeCategoryOption, CategoryGeoMap, GeoCodeOption
 
 
 class Command(BaseCommand):

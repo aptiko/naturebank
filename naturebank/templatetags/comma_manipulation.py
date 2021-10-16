@@ -2,9 +2,9 @@
 # UTF8 Encoded
 from django.template import (
     Library,
+    Node,
     TemplateSyntaxError,
     Variable,
-    Node,
     VariableDoesNotExist,
 )
 

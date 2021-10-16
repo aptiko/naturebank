@@ -1,21 +1,21 @@
 from django.contrib.gis.db.models import Extent
+from django.contrib.gis.geos import Polygon
+from django.contrib.gis.shortcuts import render_to_kml
 from django.db.models import Q
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
+from naturebank.filters import BiotopeFilter, SpeciesFilter
 from naturebank.models import (
     Biotope,
-    Species,
-    SpeciesCategoryOption,
     BiotopeImage,
     Settlement,
+    Species,
+    SpeciesCategoryOption,
 )
-from naturebank.filters import BiotopeFilter, SpeciesFilter
-from django.http import Http404, HttpResponse
-from django.contrib.gis.shortcuts import render_to_kml
-from django.contrib.gis.geos import Polygon
 
 filter_keys = (
     "category",

@@ -708,10 +708,12 @@ class BiotopeImage(models.Model):
 
     def save(self):
         if True:  # not self.thumbnail:
-            from PIL import Image as ImageClass
-            from io import StringIO
-            from django.core.files.uploadedfile import SimpleUploadedFile
             import os
+            from io import StringIO
+
+            from django.core.files.uploadedfile import SimpleUploadedFile
+
+            from PIL import Image as ImageClass
 
             THUMBNAIL_SIZE = (160, 160)
             aimage = ImageClass.open(self.image)
