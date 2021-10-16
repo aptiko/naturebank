@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# UTF8 Encoded
 import os
 
 from django.conf import settings

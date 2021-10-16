@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# UTF8 Encoded
-
 from django.contrib.gis.db import models
 from django.core.validators import validate_comma_separated_integer_list
 

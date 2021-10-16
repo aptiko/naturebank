@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# UTF8 Encoded
 from django.template import (
     Library,
     Node,

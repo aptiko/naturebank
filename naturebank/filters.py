@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from string import ascii_letters
 
 import django_filters
