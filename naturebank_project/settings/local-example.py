@@ -1,4 +1,4 @@
-from .base import *
+from .base import *  # NOQA
 
 # Customize the following parameters and rename the file to local.py
 

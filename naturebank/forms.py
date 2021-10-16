@@ -1,21 +1,5 @@
-# -*- coding: utf-8 -*-
-# UTF8 Encoded
 from django import forms
-from naturebank.models import (
-    Biotope,
-    DesignationOption,
-    OwnerOption,
-    SiteTypeOption,
-    ClimateOption,
-    EcologicalValueOption,
-    SocialValueOption,
-    CulturalValueOption,
-    ThreatOption,
-    HumanActivityOption,
-    HabitationOption,
-    Species,
-)
-from django.conf import settings
+from naturebank.models import Biotope, Species
 
 
 class BiotopeAdminForm(forms.ModelForm):

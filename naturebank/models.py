@@ -4,6 +4,7 @@
 from django.contrib.gis.db import models
 from django.core.validators import validate_comma_separated_integer_list
 
+
 # Forward declaration
 class Image:
     pass
@@ -354,7 +355,7 @@ class Biotope(models.Model):
         ),
     )
 
-    #### BIOSUPPL Fields ####
+    # BIOSUPPL Fields #
 
     # Condition (Foreign Key Relation)
     condition = models.ForeignKey(
@@ -740,7 +741,7 @@ class BiotopeImage(models.Model):
         unique_together = (("biotope", "image"), ("biotope", "id"))
 
 
-#### #### #### SECONDARY BIOTOPE-RELATED OPTION TABLES #### #### ####
+# SECONDARY BIOTOPE-RELATED OPTION TABLES #
 
 
 class HabitationOption(models.Model):
@@ -1621,7 +1622,7 @@ class SpeciesBiotope(models.Model):
         return to_return
 
 
-#### #### #### SECONDARY SPECIES-RELATED TABLES #### #### ####
+# SECONDARY SPECIES-RELATED TABLES #
 
 
 class SpeciesCategoryOption(models.Model):

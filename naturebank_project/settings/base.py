@@ -1,6 +1,3 @@
-import os
-import sys
-
 SITE_ID = 1
 USE_I18N = True
 

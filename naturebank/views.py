@@ -12,7 +12,6 @@ from naturebank.models import (
     BiotopeImage,
     Settlement,
 )
-from naturebank import models
 from naturebank.filters import BiotopeFilter, SpeciesFilter
 from django.http import Http404, HttpResponse
 from django.contrib.gis.shortcuts import render_to_kml
@@ -252,9 +251,6 @@ AREA_TRIGGER_PARAM = 300000  # Default to 30000
 
 
 def kml(request, layer):
-    agentstring = request.META["HTTP_USER_AGENT"]
-    idx = agentstring.find("MSIE")
-    isMSIE = (idx > -1) and (agentstring[idx : idx + 6] != "MSIE 9")
     bbox = request.GET.get("BBOX", request.GET.get("bbox", None))
     geo_code = request.GET.get("geo_code", request.GET.get("GEO_CODE", None))
     if geo_code:
@@ -275,14 +271,6 @@ def kml(request, layer):
             filterargs[filter_key] = afilter
     asite_code = request.GET.get("site_code", request.GET.get("SITE_CODE", None))
     species_id = request.GET.get("species", request.GET.get("SPECIES", None))
-    single_category = (
-        True
-        if request.GET.get(
-            "single_category", request.GET.get("SINGLE_CATEGORY", "False")
-        )
-        == "True"
-        else False
-    )
     if bbox:
         minx, miny, maxx, maxy = [float(i) for i in bbox.split(",")]
         geom = Polygon(
@@ -301,7 +289,6 @@ def kml(request, layer):
     ]
     if bbox:
         queryres = queryres.filter(gis_mpoly__bboverlaps=geom)
-    rescount = queryres.count()
     if geo_code:
         queryres = queryres.filter(geo_code__code__startswith=geo_code)
     if asite_code:
@@ -310,17 +297,10 @@ def kml(request, layer):
     queryres = queryres.filter(**filterargs)
     if species_id:
         queryres = queryres.filter(species__id=species_id)
-    if isMSIE:
-        order_lst = [
-            "gis_zorder",
-            "-gis_area",
-        ]
     queryres = queryres.extra(order_by=order_lst)
 
     acount = 0
     for arow in queryres:
-        if isMSIE and acount > IELimit[single_category]:
-            break
         acount += 1
         if arow.gis_area < areatrigger:
             if (

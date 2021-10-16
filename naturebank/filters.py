@@ -48,7 +48,7 @@ class AlphabeticalFilter(django_filters.ChoiceFilter):
     @property
     def field(self):
         self.extra["choices"] = [("", "---------")]
-        self.extra["choices"].extend([(l, l) for l in ASCII_LETTERS])
+        self.extra["choices"].extend([(x, x) for x in ASCII_LETTERS])
         return super(AlphabeticalFilter, self).field
 
 

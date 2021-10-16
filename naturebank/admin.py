@@ -1,27 +1,20 @@
-# -*- coding: utf-8 -*-
-# UTF8 Encoded
-from naturebank.models import *
+from naturebank import models
 from django.contrib.gis import admin
 
-# from django.contrib import admin
-from naturebank.forms import BiotopeAdminForm
 
-##########################################
 class SpeciesBiotopeInline(admin.TabularInline):
-    model = SpeciesBiotope
+    model = models.SpeciesBiotope
     extra = 3
     raw_id_fields = ("species",)
 
 
 class BiotopeSupplInline(admin.StackedInline):
-    model = Biotope
-    # FIXME: patch for collapsing can be used here
-    # classes = ['collapse', 'collapsed']
+    model = models.Biotope
     extra = 1
 
 
 class SpeciesBiotopeAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesBiotope._meta.fields]
+    list_display = [f.name for f in models.SpeciesBiotope._meta.fields]
     fieldsets = (
         (
             None,
@@ -32,13 +25,13 @@ class SpeciesBiotopeAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(SpeciesBiotope, SpeciesBiotopeAdmin)
+admin.site.register(models.SpeciesBiotope, SpeciesBiotopeAdmin)
 
 
 class BiotopeImageInline(admin.TabularInline):
     classes = ["collapse"]
     extra = 1
-    model = BiotopeImage
+    model = models.BiotopeImage
 
 
 class BiotopeAdmin(admin.ModelAdmin):
@@ -65,8 +58,6 @@ class BiotopeAdmin(admin.ModelAdmin):
     search_fields = ("site_code", "site_name_gr", "geo_code__name", "category__name")
     ordering = ("site_name_gr",)
     list_display_links = ("site_code", "site_name_gr")
-    # Uncomment to use the custom ModelForm
-    # form = BiotopeAdminForm
     fieldsets = (
         (
             None,
@@ -79,8 +70,6 @@ class BiotopeAdmin(admin.ModelAdmin):
                     ("main_char_biotopos", "main_char_natural", "main_char_built"),
                     "reg_wide",
                     ("comp_code", "comp_name"),
-                    # Uncomment to enable these extra fields of the DB
-                    # 'restore', 'introduct', 'intro_text', 'develop',
                     "respondent",
                 ),
             },
@@ -201,8 +190,6 @@ class BiotopeAdmin(admin.ModelAdmin):
                 "classes": ("collapse",),
                 "fields": (
                     "habitation",
-                    # Uncomment if custom ModelForm is used
-                    #'species_multi',
                     "species_text",
                 ),
             },
@@ -214,16 +201,6 @@ class BiotopeAdmin(admin.ModelAdmin):
                 "fields": ("document",),
             },
         ),
-        # Uncomment if u want to enable extra DB fields
-        #        ('Kωδικοί περιοχών', {
-        #            'classes': ('collapse',),
-        #            'fields': (('reg_code_1', 'reg_code_2', 'reg_code_3', 'reg_code_4')),
-        #        }),
-        #        ('Πυρκαγιές', {
-        #            'classes': ('collapse',),
-        #            'fields': (('fire_50', 'fire_3050', 'fire_1030', 'fire_10'),
-        #                        'fire_text'),
-        #        }),
     )
     filter_horizontal = (
         "designation",
@@ -238,175 +215,146 @@ class BiotopeAdmin(admin.ModelAdmin):
         "habitation",
     )
 
-    # Uncomment all the following lines if custom ModelForm is used!
-    #    def get_form(self, request, obj=None, **kwargs):
-    #        if obj:
-    #            self.form.base_fields['species_multi'].initial = list(obj.species.all())
-    #
-    #        return super(BiotopeAdmin, self).get_form(request, obj)
-
-    #    def save_model(self, request, obj, form, change):
-    #        # Clear first and then set
-    #        SpeciesBiotope.objects.filter(biotope=obj).delete()
-    #        for spec in form.cleaned_data['species_multi']:
-    #            sp = SpeciesBiotope(biotope=obj, species=spec)
-    #            sp.save()
-    #        obj.save()
     inlines = (
         BiotopeImageInline,
         SpeciesBiotopeInline,
     )
 
 
-admin.site.register(Biotope, BiotopeAdmin)
+admin.site.register(models.Biotope, BiotopeAdmin)
 
 
 class DesignationOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in DesignationOption._meta.fields]
+    list_display = [f.name for f in models.DesignationOption._meta.fields]
 
 
-admin.site.register(DesignationOption, DesignationOptionAdmin)
+admin.site.register(models.DesignationOption, DesignationOptionAdmin)
 
 
 class BiotopeCategoryOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in BiotopeCategoryOption._meta.fields]
+    list_display = [f.name for f in models.BiotopeCategoryOption._meta.fields]
 
 
-admin.site.register(BiotopeCategoryOption, BiotopeCategoryOptionAdmin)
+admin.site.register(models.BiotopeCategoryOption, BiotopeCategoryOptionAdmin)
 
 
 class GeoCodeOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in GeoCodeOption._meta.fields]
+    list_display = [f.name for f in models.GeoCodeOption._meta.fields]
 
 
-admin.site.register(GeoCodeOption, GeoCodeOptionAdmin)
+admin.site.register(models.GeoCodeOption, GeoCodeOptionAdmin)
 
 
 class WideAreaAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in WideArea._meta.fields]
+    list_display = [f.name for f in models.WideArea._meta.fields]
 
 
-admin.site.register(WideArea, WideAreaAdmin)
+admin.site.register(models.WideArea, WideAreaAdmin)
 
 
 class AbandonmentOptionAdmin(admin.ModelAdmin):
-    list_dsiplay = [f.name for f in AbandonmentOption._meta.fields]
+    list_dsiplay = [f.name for f in models.AbandonmentOption._meta.fields]
 
 
-admin.site.register(AbandonmentOption, AbandonmentOptionAdmin)
+admin.site.register(models.AbandonmentOption, AbandonmentOptionAdmin)
 
 
 class ConditionOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in ConditionOption._meta.fields]
-    # Uncomment if u want to use inlines
+    list_display = [f.name for f in models.ConditionOption._meta.fields]
 
 
-#    inlines = (BiotopeSupplInline,)
-
-admin.site.register(ConditionOption, ConditionOptionAdmin)
+admin.site.register(models.ConditionOption, ConditionOptionAdmin)
 
 
 class TrendOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in TrendOption._meta.fields]
-    # Uncomment if u want to use inlines
+    list_display = [f.name for f in models.TrendOption._meta.fields]
 
 
-#    inlines = (BiotopeSupplInline,)
-
-admin.site.register(TrendOption, TrendOptionAdmin)
+admin.site.register(models.TrendOption, TrendOptionAdmin)
 
 
 class KnowledgeOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in KnowledgeOption._meta.fields]
-    # Uncomment if u want to use inlines
+    list_display = [f.name for f in models.KnowledgeOption._meta.fields]
 
 
-#    inlines = (BiotopeSupplInline,)
-
-admin.site.register(KnowledgeOption, KnowledgeOptionAdmin)
+admin.site.register(models.KnowledgeOption, KnowledgeOptionAdmin)
 
 
 class SocialReactionOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SocialReactionOption._meta.fields]
-    # Uncomment if u want to use inlines
+    list_display = [f.name for f in models.SocialReactionOption._meta.fields]
 
 
-#    inlines = (BiotopeSupplInline,)
-
-admin.site.register(SocialReactionOption, SocialReactionOptionAdmin)
+admin.site.register(models.SocialReactionOption, SocialReactionOptionAdmin)
 
 
 class ConservationOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in ConservationOption._meta.fields]
-    # Uncomment if u want to use inlines
+    list_display = [f.name for f in models.ConservationOption._meta.fields]
 
 
-#    inlines = (BiotopeSupplInline,)
-
-admin.site.register(ConservationOption, ConservationOptionAdmin)
+admin.site.register(models.ConservationOption, ConservationOptionAdmin)
 
 
 class SocialValueOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SocialValueOption._meta.fields]
+    list_display = [f.name for f in models.SocialValueOption._meta.fields]
 
 
-admin.site.register(SocialValueOption, SocialValueOptionAdmin)
+admin.site.register(models.SocialValueOption, SocialValueOptionAdmin)
 
 
 class CulturalValueOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in CulturalValueOption._meta.fields]
+    list_display = [f.name for f in models.CulturalValueOption._meta.fields]
 
 
-admin.site.register(CulturalValueOption, CulturalValueOptionAdmin)
+admin.site.register(models.CulturalValueOption, CulturalValueOptionAdmin)
 
 
 class EcologicalValueOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in EcologicalValueOption._meta.fields]
+    list_display = [f.name for f in models.EcologicalValueOption._meta.fields]
 
 
-admin.site.register(EcologicalValueOption, EcologicalValueOptionAdmin)
+admin.site.register(models.EcologicalValueOption, EcologicalValueOptionAdmin)
 
 
 class HabitationOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in HabitationOption._meta.fields]
+    list_display = [f.name for f in models.HabitationOption._meta.fields]
 
 
-admin.site.register(HabitationOption, HabitationOptionAdmin)
+admin.site.register(models.HabitationOption, HabitationOptionAdmin)
 
 
 class SiteTypeOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SiteTypeOption._meta.fields]
+    list_display = [f.name for f in models.SiteTypeOption._meta.fields]
 
 
-admin.site.register(SiteTypeOption, SiteTypeOptionAdmin)
+admin.site.register(models.SiteTypeOption, SiteTypeOptionAdmin)
 
 
 class ClimateOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in ClimateOption._meta.fields]
+    list_display = [f.name for f in models.ClimateOption._meta.fields]
 
 
-admin.site.register(ClimateOption, ClimateOptionAdmin)
+admin.site.register(models.ClimateOption, ClimateOptionAdmin)
 
 
 class HumanActivityOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in HumanActivityOption._meta.fields]
+    list_display = [f.name for f in models.HumanActivityOption._meta.fields]
 
 
-admin.site.register(HumanActivityOption, HumanActivityOptionAdmin)
+admin.site.register(models.HumanActivityOption, HumanActivityOptionAdmin)
 
 
 class TrendPopOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in TrendPopOption._meta.fields]
+    list_display = [f.name for f in models.TrendPopOption._meta.fields]
 
 
-admin.site.register(TrendPopOption, TrendPopOptionAdmin)
+admin.site.register(models.TrendPopOption, TrendPopOptionAdmin)
 
 
 class ThreatOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in ThreatOption._meta.fields]
+    list_display = [f.name for f in models.ThreatOption._meta.fields]
 
 
-admin.site.register(ThreatOption, ThreatOptionAdmin)
+admin.site.register(models.ThreatOption, ThreatOptionAdmin)
 
 ###############################################################################
 
@@ -531,81 +479,66 @@ class SpeciesAdmin(admin.ModelAdmin):
             },
         ),
     )
-    # Uncomment if u want to use inlines
 
 
-#    inlines = (SpeciesBiotopeInline,)
-
-admin.site.register(Species, SpeciesAdmin)
-
-
-#### #### #### Species Secondary Tables #### #### ####
+admin.site.register(models.Species, SpeciesAdmin)
 
 
 class SpeciesCategoryOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesCategoryOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesCategoryOption._meta.fields]
 
 
-admin.site.register(SpeciesCategoryOption, SpeciesCategoryOptionAdmin)
+admin.site.register(models.SpeciesCategoryOption, SpeciesCategoryOptionAdmin)
 
 
 class SpeciesPlantKindOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesPlantKindOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesPlantKindOption._meta.fields]
 
 
-admin.site.register(SpeciesPlantKindOption, SpeciesPlantKindOptionAdmin)
+admin.site.register(models.SpeciesPlantKindOption, SpeciesPlantKindOptionAdmin)
 
 
 class SpeciesKnowledgeOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesKnowledgeOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesKnowledgeOption._meta.fields]
 
 
-admin.site.register(SpeciesKnowledgeOption, SpeciesKnowledgeOptionAdmin)
+admin.site.register(models.SpeciesKnowledgeOption, SpeciesKnowledgeOptionAdmin)
 
 
 class SpeciesProtectionOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesProtectionOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesProtectionOption._meta.fields]
 
 
-admin.site.register(SpeciesProtectionOption, SpeciesProtectionOptionAdmin)
+admin.site.register(models.SpeciesProtectionOption, SpeciesProtectionOptionAdmin)
 
 
 class SpeciesConservationPriorityOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesConservationPriorityOption._meta.fields]
+    list_display = [
+        f.name for f in models.SpeciesConservationPriorityOption._meta.fields
+    ]
 
 
 admin.site.register(
-    SpeciesConservationPriorityOption, SpeciesConservationPriorityOptionAdmin
+    models.SpeciesConservationPriorityOption, SpeciesConservationPriorityOptionAdmin
 )
 
 
 class SpeciesTrendOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesTrendOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesTrendOption._meta.fields]
 
 
-admin.site.register(SpeciesTrendOption, SpeciesTrendOptionAdmin)
+admin.site.register(models.SpeciesTrendOption, SpeciesTrendOptionAdmin)
 
 
 class SpeciesConservationOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesConservationOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesConservationOption._meta.fields]
 
 
-admin.site.register(SpeciesConservationOption, SpeciesConservationOptionAdmin)
+admin.site.register(models.SpeciesConservationOption, SpeciesConservationOptionAdmin)
 
 
 class SpeciesRarityOptionAdmin(admin.ModelAdmin):
-    list_display = [f.name for f in SpeciesCategoryOption._meta.fields]
+    list_display = [f.name for f in models.SpeciesCategoryOption._meta.fields]
 
 
-admin.site.register(SpeciesRarityOption, SpeciesRarityOptionAdmin)
-
-# TODO Investigate the following models from Legacy DB
-# admin.site.register(Hlpchangedsitecodes)
-# admin.site.register(Hlpdeletedsites)
-# admin.site.register(Hlpdigitized)
-# admin.site.register(Hlpdigitizedtifk)
-# admin.site.register(Hlpreportsites)
-# admin.site.register(Geolevels)
-# admin.site.register(HabCove)
-# admin.site.register(Motive)
-# admin.site.register(TagKnowledge)
+admin.site.register(models.SpeciesRarityOption, SpeciesRarityOptionAdmin)

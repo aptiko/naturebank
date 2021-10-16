@@ -1,6 +1,4 @@
 from django.conf.urls import url
-from django.conf import settings
-from django.views.generic.base import RedirectView
 
 from naturebank import views
 from naturebank.models import Biotope, Species

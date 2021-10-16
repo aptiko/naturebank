@@ -1,12 +1,44 @@
-# -*- coding: utf-8 -*-
-# UTF8 Encoded
 import os
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.utils.encoding import DjangoUnicodeDecodeError
 from django.db import IntegrityError
 
-from naturebank.models import *
+from naturebank.models import (
+    SpeciesCategoryOption,
+    SpeciesPlantKindOption,
+    SpeciesKnowledgeOption,
+    SpeciesProtectionOption,
+    SpeciesConservationPriorityOption,
+    SpeciesTrendOption,
+    SpeciesConservationOption,
+    SpeciesRarityOption,
+    Species,
+    HabitationOption,
+    TrendPopOption,
+    HumanActivityOption,
+    CulturalValueOption,
+    SocialValueOption,
+    ThreatOption,
+    EcologicalValueOption,
+    ClimateOption,
+    SiteTypeOption,
+    OwnerOption,
+    DesignationOption,
+    AbandonmentOption,
+    WideArea,
+    GeoCodeOption,
+    ConditionOption,
+    TrendOption,
+    KnowledgeOption,
+    SocialReactionOption,
+    ConservationOption,
+    Biotope,
+    BiotopeCategoryOption,
+    SitetypeOption,
+    SpeciesBiotope,
+)
+
 from naturebank_legacy.models import (
     Species as LegacySpecies,
     Biotopes as LegacyBiotope,
@@ -29,7 +61,6 @@ from naturebank_legacy.models import (
     OptSocial,
     CodeConserv,
     Specor,
-    OptMainChar,
     Lengthwidth,
     Geocodes,
     Biolocation,
@@ -285,7 +316,7 @@ class Command(BaseCommand):
 
             draft.save()
 
-        ### ### ### ### BIOTOPE PART ### ### ### ###
+        # BIOTOPE PART #
 
         # Fill the secondary tables of Biotope
 
@@ -740,7 +771,7 @@ class Command(BaseCommand):
             entry.category = bco
             entry.save()
 
-        #### #### #### Biotope Supplementary data #### #### ####
+        # Biotope Supplementary data #
         lut = LegacyBiosuppl.objects.all()
         for entry in lut:
             try:
