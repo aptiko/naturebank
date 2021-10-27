@@ -190,3 +190,12 @@ class BiotopeDetailViewTest(DataTestCase):
         # Get it by id
         response = c.get("/biotopes/d/{}/".format(gr04_id))
         self.assertContains(response, "Lefkada corinal woods", status_code=200)
+
+
+class BiotopeListFilterViewTestCase(DataTestCase):
+    def setUp(self):
+        self.create_test_data()
+
+    def test_biotope_list_filter(self):
+        response = self.client.get("/biotope_list_filter/social_value/")
+        self.assertEqual(response.status_code, 200)

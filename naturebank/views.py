@@ -8,14 +8,8 @@ from django.template import RequestContext
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
+from naturebank import models
 from naturebank.filters import BiotopeFilter, SpeciesFilter
-from naturebank.models import (
-    Biotope,
-    BiotopeImage,
-    Settlement,
-    Species,
-    SpeciesCategoryOption,
-)
 
 filter_keys = (
     "category",
@@ -55,7 +49,7 @@ def tos(request):
 
 
 class BiotopeListView(ListView):
-    model = Biotope
+    model = models.Biotope
     paginate_by = 25
 
     def _remove_trailing_zeros(self, geo_code):
@@ -114,9 +108,9 @@ class BiotopeListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(BiotopeListView, self).get_context_data(**kwargs)
         context["form"] = self.filter.form
-        imagelist = BiotopeImage.objects.filter(biotope__in=self.object_list).order_by(
-            "?"
-        )[:5]
+        imagelist = models.BiotopeImage.objects.filter(
+            biotope__in=self.object_list
+        ).order_by("?")[:5]
         context["image_list"] = imagelist
         parms = self.request.GET.copy()
         context["query_string_parms"] = parms.pop("page", True) and parms.urlencode()
@@ -124,21 +118,21 @@ class BiotopeListView(ListView):
 
 
 def render_biotope_list_filter(filter_name):
-    filter_names = {
-        "habitation": "models.HabitationOption",
-        "site_type": "models.SiteTypeOption",
-        "climate": "models.ClimateOption",
-        "ecological_value": "models.EcologicalValueOption",
-        "designation": "models.DesignationOption",
-        "condition": "models.ConditionOption",
-        "abandon": "models.AbandonmentOption",
-        "trend": "models.TrendOption",
-        "social_value": "models.SocialValueOption",
-        "cultural_value": "models.CulturalValueOption",
-        "threat": "models.ThreatOption",
-        "conservation": "models.ConservationOption",
+    filters = {
+        "habitation": models.HabitationOption,
+        "site_type": models.SiteTypeOption,
+        "climate": models.ClimateOption,
+        "ecological_value": models.EcologicalValueOption,
+        "designation": models.DesignationOption,
+        "condition": models.ConditionOption,
+        "abandon": models.AbandonmentOption,
+        "trend": models.TrendOption,
+        "social_value": models.SocialValueOption,
+        "cultural_value": models.CulturalValueOption,
+        "threat": models.ThreatOption,
+        "conservation": models.ConservationOption,
     }
-    filter_items = eval(filter_names[filter_name]).objects.all()
+    filter_items = filters[filter_name].objects.all()
     s = ""
     for item in filter_items:
         s = s + '<option value="' + str(item.id) + '">' + item.name + "</option>\n"
@@ -152,7 +146,7 @@ def biotope_list_filter(request, filter_name):
 
 
 class BiotopeDetailView(DetailView):
-    model = Biotope
+    model = models.Biotope
     template_name = "naturebank/biotope_detail.html"
 
     def get_object(self, queryset=None):
@@ -166,38 +160,46 @@ class BiotopeDetailView(DetailView):
                 if object_id
                 else queryset.get(site_code=site_code)
             )
-        except Biotope.DoesNotExist:
+        except models.Biotope.DoesNotExist:
             raise Http404
 
     def get_context_data(self, **kwargs):
         context = super(BiotopeDetailView, self).get_context_data(**kwargs)
         context["rept_amph"] = self.object.species.filter(
-            Q(species_category=SpeciesCategoryOption.objects.get(abbreviation="AMPH"))
-            | Q(species_category=SpeciesCategoryOption.objects.get(abbreviation="REPT"))
+            Q(
+                species_category=models.SpeciesCategoryOption.objects.get(
+                    abbreviation="AMPH"
+                )
+            )
+            | Q(
+                species_category=models.SpeciesCategoryOption.objects.get(
+                    abbreviation="REPT"
+                )
+            )
         )
         context.update(
             {
                 k: self.object.species.filter(
-                    species_category=SpeciesCategoryOption.objects.get(
+                    species_category=models.SpeciesCategoryOption.objects.get(
                         abbreviation=k.upper()
                     )
                 )
                 for k in ["bird", "fish", "flor", "inve", "mamm"]
             }
         )
-        context["image_list"] = BiotopeImage.objects.order_by("order").filter(
+        context["image_list"] = models.BiotopeImage.objects.order_by("order").filter(
             biotope__id=self.object.id
         )
         return context
 
 
 class BiotopeDetailBriefView(DetailView):
-    model = Biotope
+    model = models.Biotope
     template_name = "naturebank/biotope_brief.html"
 
 
 class SpeciesListView(ListView):
-    model = Species
+    model = models.Species
     paginate_by = 20
 
     def get_queryset(self):
@@ -214,7 +216,7 @@ class SpeciesListView(ListView):
 
 
 class SpeciesDetailView(DetailView):
-    model = Species
+    model = models.Species
     template_name = "naturebank/species_detail.html"
 
     def get_context_data(self, **kwargs):
@@ -275,7 +277,7 @@ def kml(request, layer):
     else:
         areatrigger = 0
 
-    queryres = Biotope.objects.filter(category=layers[layer])
+    queryres = models.Biotope.objects.filter(category=layers[layer])
     order_lst = [
         "gis_zorder",
     ]
@@ -285,7 +287,7 @@ def kml(request, layer):
         queryres = queryres.filter(geo_code__code__startswith=geo_code)
     if asite_code:
         asite_code = asite_code.replace("AE", "A0")
-        queryres = Biotope.objects.filter(site_code=asite_code)
+        queryres = models.Biotope.objects.filter(site_code=asite_code)
     queryres = queryres.filter(**filterargs)
     if species_id:
         queryres = queryres.filter(species__id=species_id)
@@ -346,13 +348,13 @@ def bound(request):
             geo_code.pop()
         geo_code = ",".join(geo_code)
 
-    queryres = Biotope.objects.all()
+    queryres = models.Biotope.objects.all()
     if geo_code:
         queryres = queryres.filter(geo_code__code__startswith=geo_code)
     queryres = queryres.filter(**filterargs)
     if asite_code:
         asite_code = asite_code.replace("AE", "A0")
-        queryres = Biotope.objects.filter(site_code=asite_code)
+        queryres = models.Biotope.objects.filter(site_code=asite_code)
     if species_id:
         queryres = queryres.filter(species__id=species_id)
 
@@ -360,14 +362,14 @@ def bound(request):
         extent = queryres.aggregate(Extent("gis_mpoly"))
         result = ",".join([str(x) for x in extent["gis_mpoly__extent"]])
     except TypeError:
-        extent = Biotope.objects.all().aggregate(Extent("gis_mpoly"))
+        extent = models.Biotope.objects.all().aggregate(Extent("gis_mpoly"))
         result = ",".join([str(x) for x in extent["gis_mpoly__extent"]])
     return HttpResponse(result, content_type="text/plain")
 
 
 def settlements_kml(request):
     bbox = request.GET.get("BBOX", request.GET.get("bbox", None))
-    queryres = Settlement.objects.all().filter(point__isnull=False)
+    queryres = models.Settlement.objects.all().filter(point__isnull=False)
     if bbox:
         minx, miny, maxx, maxy = [float(i) for i in bbox.split(",")]
         geom = Polygon(
